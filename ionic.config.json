@@ -1,0 +1,8 @@
+{
+  "name": "easycine",
+  "app_id": "0f0ce43b",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
