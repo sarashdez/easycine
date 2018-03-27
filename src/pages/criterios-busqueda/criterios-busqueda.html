@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      criteriosBusqueda
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page4" style="background-color:#3A286B;">
+  <button id="criteriosBusqueda-button3" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToEligeTuCine()">
+    Prefiero elegir mi cine
+  </button>
+  <form id="criteriosBusqueda-form1">
+    <div class="spacer" style="width:300px;height:14px;" id="criteriosBusqueda-spacer5"></div>
+    <ion-item id="criteriosBusqueda-select1">
+      <ion-label>
+        Empresa
+      </ion-label>
+      <ion-select name="empresa">
+        <ion-option>
+          Yelmo
+        </ion-option>
+        <ion-option>
+          Cinesa
+        </ion-option>
+        <ion-option>
+          Ambas
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer2"></div>
+    <div id="criteriosBusqueda-markdown2" class="show-list-numbers-and-dots">
+      <p style="color:#FFFFFF;">
+        ¿A partir de qué hora quieres ir al cine?
+      </p>
+    </div>
+    <ion-item id="criteriosBusqueda-select2">
+      <ion-label>
+        Hora
+      </ion-label>
+      <ion-select name="hora">
+        <ion-option>
+          16:00
+        </ion-option>
+        <ion-option>
+          17:00
+        </ion-option>
+        <ion-option>
+          18:00
+        </ion-option>
+        <ion-option>
+          19:00
+        </ion-option>
+        <ion-option>
+          20:00
+        </ion-option>
+        <ion-option>
+          21:00
+        </ion-option>
+        <ion-option>
+          22:00
+        </ion-option>
+        <ion-option>
+          Indiferente
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer3"></div>
+    <div id="criteriosBusqueda-markdown3" class="show-list-numbers-and-dots">
+      <p style="color:#FFFFFF;">
+        Cercanía (se tendrá en cuenta tu ubicación actual)
+      </p>
+    </div>
+    <ion-item id="criteriosBusqueda-select3">
+      <ion-label>
+        Cercanía
+      </ion-label>
+      <ion-select name="">
+        <ion-option>
+          Sí
+        </ion-option>
+        <ion-option>
+          No
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <div class="spacer" style="width:300px;height:30px;" id="criteriosBusqueda-spacer4"></div>
+  </form>
+  <button id="criteriosBusqueda-button4" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToCartelera()">
+    Siguiente
+  </button>
+</ion-content>

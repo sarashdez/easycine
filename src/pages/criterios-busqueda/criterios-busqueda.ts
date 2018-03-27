@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CriteriosBusquedaPage } from '../criterios-busqueda/criterios-busqueda';
 import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
 import { TrailerPage } from '../trailer/trailer';
@@ -9,17 +8,14 @@ import { PaypalPage } from '../paypal/paypal';
 import { EligeTuCinePage } from '../elige-tu-cine/elige-tu-cine';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-criterios-busqueda',
+  templateUrl: 'criterios-busqueda.html'
 })
-export class HomePage {
+export class CriteriosBusquedaPage {
 
   constructor(public navCtrl: NavController) {
   }
-  goToCriteriosBusqueda(params){
-    if (!params) params = {};
-    this.navCtrl.push(CriteriosBusquedaPage);
-  }goToCartelera(params){
+  goToCartelera(params){
     if (!params) params = {};
     this.navCtrl.push(CarteleraPage);
   }goToDetalle(params){

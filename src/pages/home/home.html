@@ -3,16 +3,22 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      Home
+    </ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content padding style="background:url(../../assets/img/WVXWoDDVRU2dQJkYMDKg_5dff1a54cf29c55395e87148d08062ed.png) no-repeat center;background-size:cover;" id="page1">
+  <h3 id="home-heading1" style="color:#291F70;text-align:center;">
+    ¡Bienvenido a EasyCine!
+  </h3>
+  <div id="home-markdown1" class="show-list-numbers-and-dots">
+    <p style="color:#291F70;font-size:20px;">
+      Descripción de la aplicación
+    </p>
+  </div>
+  <div class="spacer" style="width:300px;height:353px;" id="home-spacer1"></div>
+  <button id="home-button1" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToCriteriosBusqueda()">
+    Genial, ¡empecemos!
+  </button>
 </ion-content>

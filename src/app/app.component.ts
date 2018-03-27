@@ -1,44 +1,72 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { CarteleraPage } from '../pages/cartelera/cartelera';
+import { DetallePage } from '../pages/detalle/detalle';
+import { TrailerPage } from '../pages/trailer/trailer';
+import { ComprarEntradasPage } from '../pages/comprar-entradas/comprar-entradas';
+import { PaypalPage } from '../pages/paypal/paypal';
+import { ProximosEstrenosPage } from '../pages/proximos-estrenos/proximos-estrenos';
+import { MisEntradasPage } from '../pages/mis-entradas/mis-entradas';
+import { CriteriosBusquedaPage } from '../pages/criterios-busqueda/criterios-busqueda';
+import { EligeTuCinePage } from '../pages/elige-tu-cine/elige-tu-cine';
+import { LoginPage } from '../pages/login/login';
+import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
+
+
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) navCtrl: Nav;
+    rootPage:any = HomePage;
 
-  rootPage: any = HomePage;
-
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  goToCartelera(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(CarteleraPage);
+  }goToDetalle(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(DetallePage);
+  }goToTrailer(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(TrailerPage);
+  }goToComprarEntradas(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(ComprarEntradasPage);
+  }goToPaypal(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(PaypalPage);
+  }goToProximosEstrenos(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(ProximosEstrenosPage);
+  }goToMisEntradas(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(MisEntradasPage);
+  }goToCriteriosBusqueda(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(CriteriosBusquedaPage);
+  }goToEligeTuCine(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(EligeTuCinePage);
+  }goToLogin(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(LoginPage);
+  }goToCrearCuenta(params){
+    if (!params) params = {};
+    this.navCtrl.setRoot(CrearCuentaPage);
   }
 }

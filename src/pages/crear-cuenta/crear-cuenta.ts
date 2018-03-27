@@ -1,25 +1,20 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CriteriosBusquedaPage } from '../criterios-busqueda/criterios-busqueda';
 import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
 import { TrailerPage } from '../trailer/trailer';
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';
-import { EligeTuCinePage } from '../elige-tu-cine/elige-tu-cine';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-crear-cuenta',
+  templateUrl: 'crear-cuenta.html'
 })
-export class HomePage {
+export class CrearCuentaPage {
 
   constructor(public navCtrl: NavController) {
   }
-  goToCriteriosBusqueda(params){
-    if (!params) params = {};
-    this.navCtrl.push(CriteriosBusquedaPage);
-  }goToCartelera(params){
+  goToCartelera(params){
     if (!params) params = {};
     this.navCtrl.push(CarteleraPage);
   }goToDetalle(params){
@@ -34,8 +29,5 @@ export class HomePage {
   }goToPaypal(params){
     if (!params) params = {};
     this.navCtrl.push(PaypalPage);
-  }goToEligeTuCine(params){
-    if (!params) params = {};
-    this.navCtrl.push(EligeTuCinePage);
   }
 }

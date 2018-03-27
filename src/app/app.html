@@ -1,19 +1,35 @@
-<ion-menu [content]="content">
+<ion-menu [content]="mainContent">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>
+        Menu
+      </ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+  <ion-content style="background:url(../assets/img/Lo0urVMBSEqP3nvQkW7J_5dff1a54cf29c55395e87148d08062ed.jpg) no-repeat center;background-size:cover;" id="side-menu21">
+    <ion-list id="menu-list1">
+      <ion-item color="none" menuClose="" on-click="goToLogin()" id="menu-list-item4">
+        <ion-thumbnail item-left>
+          <img />
+        </ion-thumbnail>
+        <h2>
+          Mi perfil
+        </h2>
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToCartelera()" id="menu-list-item1">
+        Cartelera
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToProximosEstrenos()" id="menu-list-item2">
+        Próximos estrenos
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToMisEntradas()" id="menu-list-item3">
+        Mis entradas
+      </ion-item>
+      <ion-item color="none" menuClose="" on-click="goToCriteriosBusqueda()" id="menu-list-item6">
+        Criterios de búsqueda
+      </ion-item>
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav #mainContent [root]="rootPage"></ion-nav>
