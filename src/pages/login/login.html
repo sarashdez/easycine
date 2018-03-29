@@ -1,15 +1,24 @@
 <ion-header>
   <ion-navbar>
-   <!-- <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
-    <button ion-button back>
-      <ion-icon name="back"></ion-icon>
-    </button>
+
+
+
+
+    <ion-buttons left>
+      <button ion-button icon-only (click)="viewCtrl.dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
     <ion-title>
       Login
     </ion-title>
   </ion-navbar>
+
+
+
+
 </ion-header>
 <ion-content padding id="page13" style="background-color:#3A286B;">
   <form id="login-form3">
