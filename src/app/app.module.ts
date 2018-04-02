@@ -20,6 +20,7 @@ import { PaypalPage } from '../pages/paypal/paypal';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ScreenOrientation
+    ScreenOrientation,
+    NativePageTransitions
   ]
 })
 export class AppModule {}
