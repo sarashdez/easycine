@@ -63,9 +63,9 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
   providers: [
     StatusBar,
     SplashScreen,
+    NativePageTransitions,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ScreenOrientation,
-    NativePageTransitions
+    ScreenOrientation
   ]
 })
 export class AppModule {}
