@@ -4,7 +4,7 @@ import { TrailerPage } from '../trailer/trailer';
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 //import { PaypalPage } from '../paypal/paypal';
 import {CarteleraPage} from "../cartelera/cartelera";
-import {NativePageTransitions} from "@ionic-native/native-page-transitions";
+//import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 
 @Component({
   selector: 'page-detalle',
@@ -12,11 +12,11 @@ import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 })
 export class DetallePage {
 
-  constructor(public navCtrl: NavController, private viewCtrl: ViewController,
-              private nativePageTransitions: NativePageTransitions) {
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController/*,
+              private nativePageTransitions: NativePageTransitions*/) {
   }
 
-  ionViewWillEnter() {
+ /* ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
   }
 
@@ -34,7 +34,7 @@ export class DetallePage {
     this.nativePageTransitions.flip(options);
     this.navCtrl.setRoot(CarteleraPage);
     //this.navCtrl.push(CarteleraPage);
-  }
+  }*/
 
 
 

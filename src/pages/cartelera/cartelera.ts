@@ -4,6 +4,7 @@ import { DetallePage } from '../detalle/detalle';
 import { TrailerPage } from '../trailer/trailer';
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';
+import { ViewController } from "ionic-angular";
 
 @Component({
   selector: 'page-cartelera',
@@ -11,8 +12,16 @@ import { PaypalPage } from '../paypal/paypal';
 })
 export class CarteleraPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController) {
   }
+
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+  }
+
+
+
+
   goToDetalle(params){
     if (!params) params = {};
     this.navCtrl.push(DetallePage);

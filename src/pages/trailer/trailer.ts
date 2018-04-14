@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, ViewController} from 'ionic-angular';
 import {DetallePage} from "../detalle/detalle";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
@@ -9,7 +9,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
 })
 export class TrailerPage {
 
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController, private viewCtrl: ViewController,
               private screenOrientation: ScreenOrientation) {
     this.screenOrientation = screenOrientation;
   }
@@ -20,14 +20,18 @@ export class TrailerPage {
     alert('Orientation locked landscape.');
     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
+/*
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+  }*/
 
   /**
    * goBack().
    * Método que permite regresar a la pantalla anterior.
    */
-  goBack() {
+  /*goBack() {
     console.log("Metodo goBack");
     this.navCtrl.push(DetallePage);
   }
-
+*/
 }

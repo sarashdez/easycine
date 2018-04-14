@@ -1,25 +1,20 @@
 <ion-header>
   <ion-navbar>
 
-
-
-
     <ion-buttons left>
-      <button ion-button icon-only (click)="viewCtrl.dismiss()">
+      <button ion-button icon-only (click)="goBack()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>
     </ion-buttons>
 
-
     <ion-title>
       Login
     </ion-title>
+
   </ion-navbar>
-
-
-
-
 </ion-header>
+
+
 <ion-content padding id="page13" style="background-color:#3A286B;">
   <form id="login-form3">
     <ion-list id="login-list7">
@@ -36,11 +31,11 @@
         <ion-input type="password" placeholder=""></ion-input>
       </ion-item>
     </ion-list>
-    <div class="spacer" style="height:40px;" id="login-spacer12"></div>
+    <!--<div class="spacer" style="height:8px;" id="login-spacer12"></div>-->
     <button id="login-button10" ion-button color="light" block style="color:#291F70;" on-click="goToCartelera()">
       Iniciar sesión
     </button>
-    <div class="spacer" style="height:40px;" id="login-spacer13"></div>
+    <div class="spacer" style="height:20px;" id="login-spacer13"></div>
   </form>
   <div id="login-markdown6" style="text-align:center;" class="show-list-numbers-and-dots">
     <p style="color:#FFFFFF;font-size:16px;">
