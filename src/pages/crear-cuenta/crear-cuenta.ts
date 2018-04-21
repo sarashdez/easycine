@@ -132,7 +132,7 @@ export class CrearCuentaPage {
     }
 
     this.camera.getPicture(opciones)
-      .then(file_uri => this.imageSrc = file_uri,
+      .then(file_uri => this.image = file_uri,
         error => console.log(error));
 
   }
