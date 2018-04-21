@@ -32,6 +32,7 @@ export class CrearCuentaPage {
 
   }
 
+  public form: FormGroup;
   public myPhotosRef: any;
   public myPhoto: any;
   public myPhotoURL: any;
