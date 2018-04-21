@@ -27,6 +27,7 @@ import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/file-transfer';*/
 import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 
 @NgModule({
@@ -73,12 +74,12 @@ import { Camera } from '@ionic-native/camera';
     DatePicker,
     //NativePageTransitions,
     //File,
-
     //Transfer,
     //FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ScreenOrientation,
-    Camera
+    Camera,
+    ImagePicker
   ]
 })
 export class AppModule {}

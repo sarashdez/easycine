@@ -31,14 +31,7 @@ export class CrearCuentaPage {
       'nombre' : [''],
       'fechaNacimiento' : ['']
     })
-
   }
-
-  /*
-  public myPhotosRef: any;
-  public myPhoto: any;
-  public myPhotoURL: any;
-*/
 
   /**
    * Método crearCuenta.
@@ -100,6 +93,8 @@ export class CrearCuentaPage {
 
   /**
    * Método sacarFotoConCamara().
+   * Abre la camara para que el usuario pueda sacar una foto y utilizarla
+   * para el perfil de usuario de la aplicación.
    */
   sacarFotoConCamara() {
     console.log("Método sacarFotoConCamara()");
@@ -123,10 +118,22 @@ export class CrearCuentaPage {
 
   /**
    * Método subirFotoDesdeGaleria().
+   * Accede a la galería de fotos del dispositivo y usa la imagen escogida como
+   * foto del perfil de usuario de la aplicación.
    */
   subirFotoDesdeGaleria() {
     console.log("Método subirFotoDesdeGaleria().");
 
+    let opciones = {
+      sourceType: Camera.PicturesSourceType.PHOTOLIBRARY,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    }
+
+    this.camera.getPicture(opciones)
+      .then(file_uri => this.imageSrc = file_uri,
+        error => console.log(error));
 
   }
 
