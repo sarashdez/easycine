@@ -113,7 +113,7 @@ export class CrearCuentaPage {
 
     this.camera.getPicture(opciones)
       .then(imageData => {
-        this.image = 'data:image/jpeg;base64,${imageData}';
+        this.image = 'data:image/jpeg;base64,' + imageData;
       })
       .catch(error => {
         console.error(error);
