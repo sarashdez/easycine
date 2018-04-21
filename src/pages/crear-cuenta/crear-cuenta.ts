@@ -17,6 +17,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 export class CrearCuentaPage {
 
+
   image: string = null;
   public form: FormGroup;
 
@@ -96,12 +97,14 @@ export class CrearCuentaPage {
   addFotoPerfil(sourceType:number) {
     console.log("Método addFotoPerfil()");
 
+    let sourceFoto;
+
     if(sourceType == 1) {
-      let sourceFoto = this.camera.PictureSourceType.CAMERA;
+      sourceFoto = this.camera.PictureSourceType.CAMERA;
     }
 
     if(sourceType == 2) {
-      let sourceFoto = this.camera.PictureSourceType.PHOTOLIBRARY;
+      sourceFoto = this.camera.PictureSourceType.PHOTOLIBRARY;
     }
 
     let opciones : CameraOptions = {
