@@ -71,20 +71,16 @@ export class CrearCuentaPage {
           text: 'Sacar foto con la cámara',
           handler: ()=> {
             console.log("Opción escogida: Cámara.");
-            //this.sacarFotoConCamara();
             this.addFotoPerfil(1);
           }
         },{
           text: 'Subir desde la galería',
-          role: "",
           handler: ()=> {
             console.log("Opción escogida: Galería");
-            //this.subirFotoDesdeGaleria();
             this.addFotoPerfil(2);
           }
         },{
           text: 'No quiero añadir foto de perfil',
-          role: "",
           handler: ()=> {
             console.log("Opción escogida: Sin foto");
           }
@@ -94,15 +90,24 @@ export class CrearCuentaPage {
     actionSheet.present();
   }
 
+  /**
+   * Método addFotoPerfil(sourceType: number).
+   * @param {number} sourceType
+   * El método permite al usuario obtener una foto de perfil en el registro,
+   * ya sea haciendo uso de la cámara o escogiendo la foto de la galería.
+   */
   addFotoPerfil(sourceType:number) {
     console.log("Método addFotoPerfil()");
 
     let sourceFoto;
 
+    //Si el parámetro recibido es 1, la opción escogida por el usuario es
+    //sacar una foto con la cámara.
     if(sourceType == 1) {
       sourceFoto = this.camera.PictureSourceType.CAMERA;
     }
-
+    //Si el parámetro recibido es 2, la opción escogida por el usuario es
+    //escoger una foto de la galería del dispositivo.
     if(sourceType == 2) {
       sourceFoto = this.camera.PictureSourceType.PHOTOLIBRARY;
     }
@@ -123,89 +128,6 @@ export class CrearCuentaPage {
         console.error(error);
       });
   }
-
-  /**
-   * Método sacarFotoConCamara().
-   * Abre la camara para que el usuario pueda sacar una foto y utilizarla
-   * para el perfil de usuario de la aplicación.
-   *//*
-  sacarFotoConCamara() {
-    console.log("Método sacarFotoConCamara()");
-
-    let opciones : CameraOptions = {
-      destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 1000,
-      targetHeight: 1000,
-      quality: 100,
-      sourceType: this.camera.PictureSourceType.CAMERA
-    }
-
-    this.camera.getPicture(opciones)
-      .then(imageData => {
-        this.image = 'data:image/jpeg;base64,' + imageData;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
-  }*/
-
-  /**
-   * Método subirFotoDesdeGaleria().
-   * Accede a la galería de fotos del dispositivo y usa la imagen escogida como
-   * foto del perfil de usuario de la aplicación.
-   *//*
-  subirFotoDesdeGaleria() {
-    console.log("Método subirFotoDesdeGaleria().");
-
-    let opciones = {
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 1000,
-      targetHeight: 1000,
-      quality: 100
-    }
-
-    /*this.camera.getPicture(opciones)
-      .then(file_uri => this.image = file_uri,
-        error => console.log(error));*/
-    /*this.camera.getPicture(opciones)
-      .then(file_uri => {
-        this.image = file_uri;
-      })
-      .catch(error => {
-        console.error(error);
-      });
-
-
-  }*/
-
-
-  /*
-
-   //take Photo
-  takePhoto(sourceType:number) {
-    const options: CameraOptions = {
-      quality: 50,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType:sourceType,
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
-  }
-
-
-
-   */
-
-
-
 
 
 
