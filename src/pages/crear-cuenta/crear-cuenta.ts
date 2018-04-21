@@ -70,14 +70,16 @@ export class CrearCuentaPage {
           text: 'Sacar foto con la cámara',
           handler: ()=> {
             console.log("Opción escogida: Cámara.");
-            this.sacarFotoConCamara();
+            //this.sacarFotoConCamara();
+            this.addFotoPerfil(1);
           }
         },{
           text: 'Subir desde la galería',
           role: "",
           handler: ()=> {
             console.log("Opción escogida: Galería");
-            this.subirFotoDesdeGaleria();
+            //this.subirFotoDesdeGaleria();
+            this.addFotoPerfil(2);
           }
         },{
           text: 'No quiero añadir foto de perfil',
@@ -91,15 +93,39 @@ export class CrearCuentaPage {
     actionSheet.present();
   }
 
-  addFotoPerfil(sourceType:string) {
+  addFotoPerfil(sourceType:number) {
+    console.log("Método addFotoPerfil()");
 
+    if(sourceType == 1) {
+      let sourceFoto = this.camera.PictureSourceType.CAMERA;
+    }
+
+    if(sourceType == 2) {
+      let sourceFoto = this.camera.PictureSourceType.PHOTOLIBRARY;
+    }
+
+    let opciones : CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100,
+      sourceType: sourceFoto
+    }
+
+    this.camera.getPicture(opciones)
+      .then(imageData => {
+        this.image = 'data:image/jpeg;base64,' + imageData;
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   /**
    * Método sacarFotoConCamara().
    * Abre la camara para que el usuario pueda sacar una foto y utilizarla
    * para el perfil de usuario de la aplicación.
-   */
+   *//*
   sacarFotoConCamara() {
     console.log("Método sacarFotoConCamara()");
 
@@ -119,13 +145,13 @@ export class CrearCuentaPage {
         console.error(error);
       });
 
-  }
+  }*/
 
   /**
    * Método subirFotoDesdeGaleria().
    * Accede a la galería de fotos del dispositivo y usa la imagen escogida como
    * foto del perfil de usuario de la aplicación.
-   */
+   *//*
   subirFotoDesdeGaleria() {
     console.log("Método subirFotoDesdeGaleria().");
 
@@ -139,7 +165,7 @@ export class CrearCuentaPage {
     /*this.camera.getPicture(opciones)
       .then(file_uri => this.image = file_uri,
         error => console.log(error));*/
-    this.camera.getPicture(opciones)
+    /*this.camera.getPicture(opciones)
       .then(file_uri => {
         this.image = file_uri;
       })
@@ -148,7 +174,7 @@ export class CrearCuentaPage {
       });
 
 
-  }
+  }*/
 
 
   /*
