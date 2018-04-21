@@ -91,6 +91,10 @@ export class CrearCuentaPage {
     actionSheet.present();
   }
 
+  addFotoPerfil(sourceType:string) {
+
+  }
+
   /**
    * Método sacarFotoConCamara().
    * Abre la camara para que el usuario pueda sacar una foto y utilizarla
@@ -103,7 +107,8 @@ export class CrearCuentaPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 1000,
       targetHeight: 1000,
-      quality: 100
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.CAMERA
     }
 
     this.camera.getPicture(opciones)
@@ -143,13 +148,32 @@ export class CrearCuentaPage {
       });
 
 
-
-
-
-
   }
 
 
+  /*
+
+   //take Photo
+  takePhoto(sourceType:number) {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType:sourceType,
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+
+
+   */
 
 
 
