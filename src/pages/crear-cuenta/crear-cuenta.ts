@@ -10,7 +10,7 @@ import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';*/
 //import {DatePicker} from "@ionic-native/date-picker";
 import { Camera/*, CameraOptions */} from '@ionic-native/camera';
-import { CameraOptions } from 'ionic-native/camera';
+import { CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-crear-cuenta',
