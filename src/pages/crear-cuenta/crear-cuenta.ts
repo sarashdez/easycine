@@ -125,7 +125,7 @@ export class CrearCuentaPage {
     console.log("Método subirFotoDesdeGaleria().");
 
     let opciones = {
-      sourceType: this.camera.PicturesSourceType.PHOTOLIBRARY,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       targetWidth: 1000,
       targetHeight: 1000,
       quality: 100
