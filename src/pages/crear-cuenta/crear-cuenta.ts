@@ -136,7 +136,7 @@ export class CrearCuentaPage {
         error => console.log(error));*/
     this.camera.getPicture(opciones)
       .then(file_uri => {
-        this.image = 'data:image/jpeg;base64,' + file_uri;
+        this.image = file_uri;
       })
       .catch(error => {
         console.error(error);
