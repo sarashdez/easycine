@@ -9,39 +9,42 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page14" style="background-color:#3A286B;">
-  <form id="crearCuenta-form4">
+  <form id="formCrearCuenta" [formGroup]="form" >
     <ion-list id="crearCuenta-list8">
-      <ion-item id="crearCuenta-input3">
+      <ion-item id="crearCuenta_email">
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder=""></ion-input>
+        <ion-input formControlName="email" type="email" placeholder=""></ion-input>
       </ion-item>
-      <ion-item id="crearCuenta-input4">
+      <ion-item id="crearCuenta_password">
         <ion-label>
           Contraseña
         </ion-label>
-        <ion-input type="password" placeholder=""></ion-input>
+        <ion-input formControlName="password" type="password" placeholder=""></ion-input>
       </ion-item>
-      <ion-item id="crearCuenta-input5">
+      <ion-item id="crearCuenta_nombre">
         <ion-label>
           Nombre
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input formControlName="nombre" type="text" placeholder=""></ion-input>
       </ion-item>
     </ion-list>
-    <ion-item id="crearCuenta-input6">
+    <ion-item id="crearCuenta_fechaNacimiento">
       <ion-label>
         Fecha de nacimiento
       </ion-label>
-      <ion-input type="text" placeholder="01/01/1900"></ion-input>
+      <ion-datetime formControlName="fechaNacimiento" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" ></ion-datetime>
+      <!--<ion-input type="text" placeholder="01/01/1900"></ion-input>-->
     </ion-item>
   </form>
-  <button id="crearCuenta-button15" ion-button color="light" block style="color:#291F70;">
+  <div class="spacer" style="width:300px;height:30px;" id="crearCuenta-spacer15"></div>
+  <button id="crearCuenta-button15" ion-button color="light" block style="color:#291F70;" on-click="mostrarOpcionesFotoPerfil()">
     Añadir foto de perfil
   </button>
+  <img [src]="captureDataUrl" *ngIf="captureDataUrl"/>
   <div class="spacer" style="width:300px;height:62px;" id="crearCuenta-spacer14"></div>
-  <button id="crearCuenta-button14" ion-button color="light" block style="color:#291F70;" on-click="goToCartelera()">
+  <button id="buttonCrearCuenta" ion-button color="light" block style="color:#291F70;" on-click="crearCuenta()">
     Crear cuenta
   </button>
 </ion-content>

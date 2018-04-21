@@ -19,8 +19,15 @@ import { PaypalPage } from '../pages/paypal/paypal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
+import { DatePicker } from "@ionic-native/date-picker";
 //import {NativePageTransitions} from "@ionic-native/native-page-transitions";
+/*
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer } from '@ionic-native/file-transfer';*/
+import { Camera } from '@ionic-native/camera';
+
 
 @NgModule({
   declarations: [
@@ -63,9 +70,15 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
   providers: [
     StatusBar,
     SplashScreen,
+    DatePicker,
     //NativePageTransitions,
+    //File,
+
+    //Transfer,
+    //FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ScreenOrientation
+    ScreenOrientation,
+    Camera
   ]
 })
 export class AppModule {}

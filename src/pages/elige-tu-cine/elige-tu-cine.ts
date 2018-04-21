@@ -12,8 +12,12 @@ import { PaypalPage } from '../paypal/paypal';
 })
 export class EligeTuCinePage {
 
-  constructor(public navCtrl: NavController) {
-  }
+  constructor(public navCtrl: NavController) {  }
+
+
+
+
+
   goToCartelera(params){
     if (!params) params = {};
     this.navCtrl.push(CarteleraPage);
