@@ -131,9 +131,21 @@ export class CrearCuentaPage {
       quality: 100
     }
 
-    this.camera.getPicture(opciones)
+    /*this.camera.getPicture(opciones)
       .then(file_uri => this.image = file_uri,
-        error => console.log(error));
+        error => console.log(error));*/
+    this.camera.getPicture(opciones)
+      .then(file_uri => {
+        this.image = 'data:image/jpeg;base64,' + file_uri;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+
+
+
+
 
   }
 
