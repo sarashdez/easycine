@@ -108,8 +108,7 @@ export class CrearCuentaPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: 1000,
       targetHeight: 1000,
-      quality: 100,
-      saveToPhotoAlbum:true
+      quality: 100
     }
 
     this.camera.getPicture(opciones)
