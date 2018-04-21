@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ActionSheetController, NavController} from 'ionic-angular';
 import {FormGroup, FormBuilder} from "@angular/forms";
-import moment from 'moment';
+//import moment from 'moment';
 /*
 import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
@@ -52,13 +52,13 @@ export class CrearCuentaPage {
     let nombre: string = this.form.controls['nombre'].value;
     let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
     //Formateo de la fecha de nacimiento.
-    let dob = moment(new Date(fechaNacimiento)).format("DD-MM-YYYY");
+    //let dob = moment(new Date(fechaNacimiento)).format("DD-MM-YYYY");
 
     console.log("Valores obtenidos del formulario");
     console.log("Email: " + email);
     console.log("Contraseña: " + password);
     console.log("Nombre: " + nombre);
-    console.log("Fecha de nacimiento: " + dob);
+    console.log("Fecha de nacimiento: " + fechaNacimiento);
 
   }
 
