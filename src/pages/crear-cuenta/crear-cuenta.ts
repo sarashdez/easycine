@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ActionSheetController, NavController} from 'ionic-angular';
-import {FormBuilder} from "@angular/forms";
+import {FormGroup, FormBuilder} from "@angular/forms";
 import moment from 'moment';
 /*
 import { CarteleraPage } from '../cartelera/cartelera';
