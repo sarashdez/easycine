@@ -56,7 +56,10 @@
       "cordova-plugin-screen-orientation": {},
       "com.telerik.plugins.nativepagetransitions": {},
       "cordova-plugin-datepicker": {},
-      "cordova-plugin-camera": {},
+      "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": "the app need the camera",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "the app need the photolibrary"
+      },
       "cordova-plugin-file": {},
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-filepath": {}

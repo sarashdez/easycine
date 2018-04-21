@@ -9,14 +9,16 @@ import { TrailerPage } from '../trailer/trailer';
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';*/
 //import {DatePicker} from "@ionic-native/date-picker";
-import { Camera/*, CameraOptions */} from '@ionic-native/camera';
-import { CameraOptions } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-crear-cuenta',
   templateUrl: 'crear-cuenta.html'
 })
 export class CrearCuentaPage {
+
+  image: string = null;
+  public form: FormGroup;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
@@ -32,11 +34,11 @@ export class CrearCuentaPage {
 
   }
 
-  public form: FormGroup;
+  /*
   public myPhotosRef: any;
   public myPhoto: any;
   public myPhotoURL: any;
-
+*/
 
   /**
    * Método crearCuenta.
@@ -101,34 +103,20 @@ export class CrearCuentaPage {
    */
   sacarFotoConCamara() {
     console.log("Método sacarFotoConCamara()");
-/*
-    let captureDataUrl: string;
 
-    const opciones ={
-      quality: 70,
-      encodingType: this.camera.EncodingType.PNG,
-      destinationType: Camera.DestinationType.DATA_URL,
-      saveToPhotoAlbum: false,
-      correctOrientation: true,
-      mediaType: Camera.MediaType.PICTURE
-    };
+    let opciones : CameraOptions = {
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      quality: 100
+    }
 
-    Camera.getPicture(opciones).then((imageData) => {
-      this.captureDataUrl = 'data:image/png;base64' + imageData;
-    }, (err) => {
-      //Handle error
-    });*/
-    Camera.getPicture({
-      quality: 70,
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: Camera.PictureSourceType.CAMERA,
-      encodingType: Camera.EncodingType.PNG,
-      saveToPhotoAlbum: true
-    }).then(imageData => {
-      this.myPhoto = imageData;
-     // this.uploadPhoto();
-    }, error => {
-      console.log("Error");
+    this.camera.getPicture(opciones)
+      .then(imageData => {
+        this.image = 'data:image/jpeg;base64,${imageData}';
+      })
+      .catch(error => {
+        console.error(error);
       });
 
   }
