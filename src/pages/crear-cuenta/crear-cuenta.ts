@@ -20,9 +20,10 @@ import { storage } from 'firebase';
 export class CrearCuentaPage {
 
   public form: FormGroup;
+
   public displayForm : boolean = true;
   public displayError : string;
-  private image : string = null;
+  image : string = null;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
@@ -159,7 +160,7 @@ export class CrearCuentaPage {
     let storageRef = firebase.storage().ref();
 
     const foto = storageRef.child(`profilePhotos/${userEmail}.jpg`);
-    foto.putString(image, firebase.storage.StringFormat.DATA_URL);
+    foto.putString(this.image, firebase.storage.StringFormat.DATA_URL);
   }
 
   guardarFechaNacimiento() {
