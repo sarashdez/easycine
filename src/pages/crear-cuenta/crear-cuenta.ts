@@ -62,7 +62,7 @@ export class CrearCuentaPage {
 
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
-        subirFotoPerfil(email);
+        this.subirFotoPerfil(email);
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
