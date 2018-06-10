@@ -19,12 +19,10 @@ import { storage } from 'firebase';
 })
 export class CrearCuentaPage {
 
-
-  image: string = null;
   public form: FormGroup;
   public displayForm : boolean = true;
   public displayError : string;
-  private image : string;
+  private image : string = null;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
