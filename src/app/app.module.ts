@@ -1,7 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from "@angular/http";
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
+
 import { HomePage } from '../pages/home/home';
 import { CriteriosBusquedaPage } from '../pages/criterios-busqueda/criterios-busqueda';
 import { EligeTuCinePage } from '../pages/elige-tu-cine/elige-tu-cine';
@@ -17,9 +21,8 @@ import { TrailerPage } from '../pages/trailer/trailer';
 import { PaypalPage } from '../pages/paypal/paypal';
 
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { ScreenOrientation } from "@ionic-native/screen-orientation";
+
+//import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { DatePicker } from "@ionic-native/date-picker";
 //import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 /*
@@ -28,6 +31,12 @@ import { FilePath } from '@ionic-native/file-path';
 import { Transfer } from '@ionic-native/file-transfer';*/
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { environment } from "../environments/environment";
+
+import { AngularFireModule } from "angularfire2";
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AutenticacionProvider } from "../providers/autenticacion/autenticacion";
 
 
 @NgModule({
@@ -49,7 +58,11 @@ import { ImagePicker } from '@ionic-native/image-picker';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,14 +85,10 @@ import { ImagePicker } from '@ionic-native/image-picker';
     StatusBar,
     SplashScreen,
     DatePicker,
-    //NativePageTransitions,
-    //File,
-    //Transfer,
-    //FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ScreenOrientation,
     Camera,
-    ImagePicker
+    ImagePicker,
+    AutenticacionProvider
   ]
 })
 export class AppModule {}

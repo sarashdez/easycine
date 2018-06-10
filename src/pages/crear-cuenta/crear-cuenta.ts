@@ -10,6 +10,8 @@ import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';*/
 //import {DatePicker} from "@ionic-native/date-picker";
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
+import { storage } from 'firebase';
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -20,11 +22,15 @@ export class CrearCuentaPage {
 
   image: string = null;
   public form: FormGroup;
+  public displayForm : boolean = true;
+  public displayError : string;
+  private image : string;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
               public actionSheetCtrl : ActionSheetController,
-              private camera : Camera
+              private camera : Camera,
+              public _AUTH  : AutenticacionProvider
               /*private datePicker: DatePicker*/) {
     this.form = this._FB.group({
       'email' : [''],
@@ -36,7 +42,7 @@ export class CrearCuentaPage {
 
   /**
    * Método crearCuenta.
-   * Coge los datos obtenidos en el formulario y registra al usuario haciendo uso de Firebase.
+   * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
    */
   crearCuenta() {
     console.log("Metodo crearCuenta()");
@@ -54,6 +60,20 @@ export class CrearCuentaPage {
     console.log("Nombre: " + nombre);
     console.log("Fecha de nacimiento: " + fechaNacimiento);
 
+    this._AUTH.signUp(email, password)
+      .then((auth: string) => {
+        subirFotoPerfil(email);
+        this.form.reset();
+        this.displayForm = false;
+        alert("¡Tu cuenta ha sido creada!");
+        console.log("crearCuenta Correcto");
+      })
+      .catch((error) => {
+        this.displayError = error.message;
+        alert("Tienes que introducir un usuario y contraseña válidos.");
+        console.log("Error crearCuenta");
+        console.log(error.message);
+      });
   }
 
   /**
@@ -98,7 +118,7 @@ export class CrearCuentaPage {
    */
   addFotoPerfil(sourceType:number) {
     console.log("Método addFotoPerfil()");
-
+    let email: string = this.form.controls['email'].value;
     let sourceFoto;
 
     //Si el parámetro recibido es 1, la opción escogida por el usuario es
@@ -114,9 +134,12 @@ export class CrearCuentaPage {
 
     let opciones : CameraOptions = {
       destinationType: this.camera.DestinationType.DATA_URL,
-      targetWidth: 1000,
-      targetHeight: 1000,
-      quality: 100,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 600,
+      targetHeight: 600,
+      quality: 60,
+      correctOrientation: true,
       sourceType: sourceFoto
     }
 
@@ -129,6 +152,21 @@ export class CrearCuentaPage {
       });
   }
 
+  /**
+   * Método subirFotoPerfil()
+   * La foto obtenida por el usuario durante el proceso de registro (ya sea desde la
+   * cámara o desde la galería de su dispositivo) se sube al servidor.
+   */
+  subirFotoPerfil(userEmail : string) {
+    let storageRef = firebase.storage().ref();
+
+    const foto = storageRef.child(`profilePhotos/${userEmail}.jpg`);
+    foto.putString(image, firebase.storage.StringFormat.DATA_URL);
+  }
+
+  guardarFechaNacimiento() {
+
+  }
 
 
 }
