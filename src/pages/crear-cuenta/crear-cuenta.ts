@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {ActionSheetController, NavController} from 'ionic-angular';
-import {FormGroup, FormBuilder} from "@angular/forms";
-//import moment from 'moment';
+import { ActionSheetController, NavController } from 'ionic-angular';
+import { FormGroup, FormBuilder } from "@angular/forms";
+
 /*
 import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
@@ -19,18 +19,16 @@ import { storage } from 'firebase';
 })
 export class CrearCuentaPage {
 
-  public form: FormGroup;
-
+  image : string = null;
   public displayForm : boolean = true;
   public displayError : string;
-  image : string = null;
+  public form: FormGroup;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
               public actionSheetCtrl : ActionSheetController,
               private camera : Camera,
-              public _AUTH  : AutenticacionProvider
-              /*private datePicker: DatePicker*/) {
+              public _AUTH  : AutenticacionProvider) {
     this.form = this._FB.group({
       'email' : [''],
       'password' : [''],
@@ -50,8 +48,6 @@ export class CrearCuentaPage {
     let password: string = this.form.controls['password'].value;
     let nombre: string = this.form.controls['nombre'].value;
     let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
-    //Formateo de la fecha de nacimiento.
-    //let dob = moment(new Date(fechaNacimiento)).format("DD-MM-YYYY");
 
     console.log("Valores obtenidos del formulario");
     console.log("Email: " + email);
@@ -68,7 +64,7 @@ export class CrearCuentaPage {
         console.log("crearCuenta Correcto");
       })
       .catch((error) => {
-        this.displayError = error.message;
+        //this.displayError = error.message;
         alert("Tienes que introducir un usuario y contraseña válidos.");
         console.log("Error crearCuenta");
         console.log(error.message);
