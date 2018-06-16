@@ -19,6 +19,7 @@ import { storage } from 'firebase';
 })
 export class CrearCuentaPage {
 
+  //Clase nueva
   image : string = null;
   public displayForm : boolean = true;
   public displayError : string;
