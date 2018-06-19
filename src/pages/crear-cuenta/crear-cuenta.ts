@@ -140,7 +140,11 @@ export class CrearCuentaPage {
         sourceType: sourceFoto
       }
       const result = await this.camera.getPicture(opciones);
-      this.image = `data:image/jpeg;base64,${result}`;
+      const x = `data:image/jpeg;base64,${result}`;
+
+      const foto = storage().ref('profilePhotos');
+      foto.putString(x, 'data_url');
+
     }
     catch(e) {
       console.error(e);
@@ -163,8 +167,7 @@ export class CrearCuentaPage {
    */
 
   subirFotoPerfil(userEmail : string) {
-    const foto = storage().ref('profilePhotos');
-    foto.putString(this.image, 'data_url');
+
     /*
     let storageRef = storage().ref();
 
