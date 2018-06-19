@@ -58,7 +58,7 @@ export class CrearCuentaPage {
 
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
-        //this.subirFotoPerfil(email);
+        this.subirFotoPerfil(email);
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
@@ -153,13 +153,13 @@ export class CrearCuentaPage {
    * La foto obtenida por el usuario durante el proceso de registro (ya sea desde la
    * cámara o desde la galería de su dispositivo) se sube al servidor.
    */
-  /*
+
   subirFotoPerfil(userEmail : string) {
-    let storageRef = firebase.storage().ref();
+    let storageRef = storage().ref();
 
     const foto = storageRef.child(`profilePhotos/${userEmail}.jpg`);
-    foto.putString(this.image, firebase.storage.StringFormat.DATA_URL);
-  }*/
+    foto.putString(this.image, storage.StringFormat.DATA_URL);
+  }
 
   guardarFechaNacimiento() {
 
