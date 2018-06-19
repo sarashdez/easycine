@@ -112,7 +112,7 @@ export class CrearCuentaPage {
    * El método permite al usuario obtener una foto de perfil en el registro,
    * ya sea haciendo uso de la cámara o escogiendo la foto de la galería.
    */
-  addFotoPerfil(sourceType:number) {
+  async addFotoPerfil(sourceType:number) {
     console.log("Método addFotoPerfil()");
     let email: string = this.form.controls['email'].value;
     let sourceFoto;
@@ -128,24 +128,32 @@ export class CrearCuentaPage {
       sourceFoto = this.camera.PictureSourceType.PHOTOLIBRARY;
     }
 
-    let opciones : CameraOptions = {
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      targetWidth: 600,
-      targetHeight: 600,
-      quality: 60,
-      correctOrientation: true,
-      sourceType: sourceFoto
+    try {
+      let opciones : CameraOptions = {
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        targetWidth: 600,
+        targetHeight: 600,
+        quality: 60,
+        correctOrientation: true,
+        sourceType: sourceFoto
+      }
+      const result = await this.camera.getPicture(opciones);
+      this.image = `data:image/jpeg;base64,${result}`;
+    }
+    catch(e) {
+      console.error(e);
     }
 
-    this.camera.getPicture(opciones)
-      .then(imageData => {
+
+
+      /*.then(imageData => {
         this.image = 'data:image/jpeg;base64,' + imageData;
       })
       .catch(error => {
         console.error(error);
-      });
+      });*/
   }
 
   /**
@@ -155,10 +163,13 @@ export class CrearCuentaPage {
    */
 
   subirFotoPerfil(userEmail : string) {
+    const foto = storage().ref('profilePhotos');
+    foto.putString(this.image, 'data_url');
+    /*
     let storageRef = storage().ref();
 
     const foto = storageRef.child(`profilePhotos/${userEmail}.jpg`);
-    foto.putString(this.image, storage.StringFormat.DATA_URL);
+    foto.putString(this.image, storage.StringFormat.DATA_URL);*/
   }
 
   guardarFechaNacimiento() {
