@@ -24,6 +24,7 @@ export class CrearCuentaPage {
   public displayForm : boolean = true;
   public displayError : string;
   public form: FormGroup;
+  private email: string = null;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
@@ -45,20 +46,21 @@ export class CrearCuentaPage {
   crearCuenta() {
     console.log("Metodo crearCuenta()");
 
-    let email: string = this.form.controls['email'].value;
+    this.email = this.form.controls['email'].value;
+    //let email: string = this.form.controls['email'].value;
     let password: string = this.form.controls['password'].value;
     let nombre: string = this.form.controls['nombre'].value;
     let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
 
     console.log("Valores obtenidos del formulario");
-    console.log("Email: " + email);
+    console.log("Email: " + this.email);
     console.log("Contraseña: " + password);
     console.log("Nombre: " + nombre);
     console.log("Fecha de nacimiento: " + fechaNacimiento);
 
-    this._AUTH.signUp(email, password)
+    this._AUTH.signUp(this.email, password)
       .then((auth: string) => {
-        this.subirFotoPerfil(email);
+        //this.subirFotoPerfil(email);
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
@@ -142,7 +144,8 @@ export class CrearCuentaPage {
       const result = await this.camera.getPicture(opciones);
       const x = `data:image/jpeg;base64,${result}`;
 
-      const foto = storage().ref('profilePhotos');
+      const foto = storage().ref(`profilePhotos/${this.email}.jpg`)
+      //const foto = storage().ref('profilePhotos/'${this.email});
       foto.putString(x, 'data_url');
 
     }
