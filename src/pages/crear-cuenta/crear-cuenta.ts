@@ -12,6 +12,7 @@ import { PaypalPage } from '../paypal/paypal';*/
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
 import { storage } from 'firebase';
+import {StorageProvider} from "../../providers/storage/storage";
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -20,17 +21,18 @@ import { storage } from 'firebase';
 export class CrearCuentaPage {
 
   //Clase nueva
-  image : string = null;
+  imageRef : string = null;
   public displayForm : boolean = true;
   public displayError : string;
   public form: FormGroup;
-  private email: string = null;
+  //private email: string = null;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
               public actionSheetCtrl : ActionSheetController,
               private camera : Camera,
-              public _AUTH  : AutenticacionProvider) {
+              public _AUTH  : AutenticacionProvider,
+              private _STR : StorageProvider ) {
     this.form = this._FB.group({
       'email' : [''],
       'password' : [''],
@@ -46,21 +48,22 @@ export class CrearCuentaPage {
   crearCuenta() {
     console.log("Metodo crearCuenta()");
 
-    this.email = this.form.controls['email'].value;
-    //let email: string = this.form.controls['email'].value;
+    //this.email = this.form.controls['email'].value;
+    let email: string = this.form.controls['email'].value;
     let password: string = this.form.controls['password'].value;
     let nombre: string = this.form.controls['nombre'].value;
     let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
 
     console.log("Valores obtenidos del formulario");
-    console.log("Email: " + this.email);
+    console.log("Email: " + email);
     console.log("Contraseña: " + password);
     console.log("Nombre: " + nombre);
     console.log("Fecha de nacimiento: " + fechaNacimiento);
 
-    this._AUTH.signUp(this.email, password)
+    this._AUTH.signUp(email, password)
       .then((auth: string) => {
         //this.subirFotoPerfil(email);
+        this._STR.uploadToCloud(this.imageRef, email);
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
@@ -142,11 +145,12 @@ export class CrearCuentaPage {
         sourceType: sourceFoto
       }
       const result = await this.camera.getPicture(opciones);
-      const x = `data:image/jpeg;base64,${result}`;
+      this.imageRef = `data:image/jpeg;base64,${result}`;
 
-      const foto = storage().ref(`profilePhotos/${this.email}.jpg`)
+      /*
+      const foto = storage().ref(`profilePhotos/${this.email}.jpg`);
       //const foto = storage().ref('profilePhotos/'${this.email});
-      foto.putString(x, 'data_url');
+      foto.putString(x, 'data_url');*/
 
     }
     catch(e) {
