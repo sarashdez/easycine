@@ -38,6 +38,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AutenticacionProvider } from "../providers/autenticacion/autenticacion";
 import {AngularFireStorageModule} from "angularfire2/storage";
+import {StorageProvider} from "../providers/storage/storage";
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import {AngularFireStorageModule} from "angularfire2/storage";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     ImagePicker,
-    AutenticacionProvider
+    AutenticacionProvider,
+    StorageProvider
   ]
 })
 export class AppModule {}
