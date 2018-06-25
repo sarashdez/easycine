@@ -42,42 +42,6 @@ export class CrearCuentaPage {
   }
 
   /**
-   * Método crearCuenta.
-   * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
-   */
-  crearCuenta() {
-    console.log("Metodo crearCuenta()");
-
-    //this.email = this.form.controls['email'].value;
-    let email: string = this.form.controls['email'].value;
-    let password: string = this.form.controls['password'].value;
-    let nombre: string = this.form.controls['nombre'].value;
-    let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
-
-    console.log("Valores obtenidos del formulario");
-    console.log("Email: " + email);
-    console.log("Contraseña: " + password);
-    console.log("Nombre: " + nombre);
-    console.log("Fecha de nacimiento: " + fechaNacimiento);
-
-    this._AUTH.signUp(email, password)
-      .then((auth: string) => {
-        //this.subirFotoPerfil(email);
-        this._STR.uploadToCloud(this.imageRef, email);
-        this.form.reset();
-        this.displayForm = false;
-        alert("¡Tu cuenta ha sido creada!");
-        console.log("crearCuenta Correcto");
-      })
-      .catch((error) => {
-        //this.displayError = error.message;
-        alert("Tienes que introducir un usuario y contraseña válidos.");
-        console.log("Error crearCuenta");
-        console.log(error.message);
-      });
-  }
-
-  /**
    * Método mostrarOpcionesFotoPerfil().
    * Se muestra un menú con las opciones del usuario: subir foto desde la galería,
    * sacar una foto con la cámara o no añadir foto.
@@ -184,6 +148,42 @@ export class CrearCuentaPage {
 
   guardarFechaNacimiento() {
 
+  }
+
+  /**
+   * Método crearCuenta.
+   * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
+   */
+  crearCuenta() {
+    console.log("Metodo crearCuenta()");
+
+    //this.email = this.form.controls['email'].value;
+    let email: string = this.form.controls['email'].value;
+    let password: string = this.form.controls['password'].value;
+    let nombre: string = this.form.controls['nombre'].value;
+    let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
+
+    console.log("Valores obtenidos del formulario");
+    console.log("Email: " + email);
+    console.log("Contraseña: " + password);
+    console.log("Nombre: " + nombre);
+    console.log("Fecha de nacimiento: " + fechaNacimiento);
+
+    this._AUTH.signUp(email, password)
+      .then((auth: string) => {
+        //this.subirFotoPerfil(email);
+        this._STR.uploadToCloud(this.imageRef, email);
+        this.form.reset();
+        this.displayForm = false;
+        alert("¡Tu cuenta ha sido creada!");
+        console.log("crearCuenta Correcto");
+      })
+      .catch((error) => {
+        //this.displayError = error.message;
+        alert("Tienes que introducir un usuario y contraseña válidos.");
+        console.log("Error crearCuenta");
+        console.log(error.message);
+      });
   }
 
 
