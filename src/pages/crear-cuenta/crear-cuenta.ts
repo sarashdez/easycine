@@ -21,10 +21,11 @@ import {StorageProvider} from "../../providers/storage/storage";
 export class CrearCuentaPage {
 
   //Clase nueva
-  imageRef : string = null;
+  public imageRef : string = null;
   public displayForm : boolean = true;
   public displayError : string;
   public form: FormGroup;
+  public fotoPerfilExists : string = "Existe foto";
   //private email: string = null;
 
   constructor(public navCtrl: NavController,
@@ -68,6 +69,8 @@ export class CrearCuentaPage {
           text: 'No quiero añadir foto de perfil',
           handler: ()=> {
             console.log("Opción escogida: Sin foto");
+            this.fotoPerfilExists = null;
+            console.log("fotoPerfilExists: "+ this.fotoPerfilExists);
           }
         }
       ]
@@ -82,8 +85,6 @@ export class CrearCuentaPage {
    * ya sea haciendo uso de la cámara o escogiendo la foto de la galería.
    */
   async addFotoPerfil(sourceType:number) {
-    console.log("Método addFotoPerfil()");
-    let email: string = this.form.controls['email'].value;
     let sourceFoto;
 
     //Si el parámetro recibido es 1, la opción escogida por el usuario es
@@ -99,7 +100,7 @@ export class CrearCuentaPage {
 
     try {
       let opciones : CameraOptions = {
-        quality: 50,
+        quality: 70,
         targetHeight: 600,
         targetWidth: 600,
         destinationType: this.camera.DestinationType.DATA_URL,
@@ -112,11 +113,6 @@ export class CrearCuentaPage {
       this.imageRef = `data:image/jpeg;base64,${result}`;
 
       console.log("addFotoPerfil. imageRef: "+this.imageRef);
-      /*
-      const foto = storage().ref(`profilePhotos/${this.email}.jpg`);
-      //const foto = storage().ref('profilePhotos/'${this.email});
-      foto.putString(x, 'data_url');*/
-
     }
     catch(e) {
       console.error(e);
@@ -137,25 +133,13 @@ export class CrearCuentaPage {
    * La foto obtenida por el usuario durante el proceso de registro (ya sea desde la
    * cámara o desde la galería de su dispositivo) se sube al servidor.
    */
-
+/*
   subirFotoPerfil(email: string) {
     console.log("subirFotoPerfil. imageRef: "+this.imageRef);
     let upload = this._STR.uploadToCloud(this.imageRef, email);
-
-    // Perhaps this syntax might change, it's no error here!
-    upload.then().then(res => {
-      this._STR.savePhotoMetadata(res.metadata);
-    });
-  }
-/*
-  subirFotoPerfil(userEmail : string) {
-
-
-    let storageRef = storage().ref();
-
-    const foto = storageRef.child(`profilePhotos/${userEmail}.jpg`);
-    foto.putString(this.image, storage.StringFormat.DATA_URL);
   }*/
+
+
 
   guardarFechaNacimiento() {
 
@@ -185,7 +169,12 @@ export class CrearCuentaPage {
 
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
-        this.subirFotoPerfil(email);
+        //this.subirFotoPerfil(email);
+        console.log("fotoPerfilExists: "+this.fotoPerfilExists);
+        if(this.fotoPerfilExists != null) {
+          this._STR.uploadToCloud(this.imageRef, email);
+        }
+        this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email);
         //this._STR.uploadToCloud(this.imageRef, email);
         this.form.reset();
         this.displayForm = false;

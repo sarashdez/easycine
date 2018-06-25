@@ -37,8 +37,8 @@ import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AutenticacionProvider } from "../providers/autenticacion/autenticacion";
-import {AngularFireStorageModule} from "angularfire2/storage";
-import {StorageProvider} from "../providers/storage/storage";
+import { AngularFireStorageModule } from "angularfire2/storage";
+import { StorageProvider } from "../providers/storage/storage";
 
 
 @NgModule({
@@ -64,8 +64,8 @@ import {StorageProvider} from "../providers/storage/storage";
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
