@@ -111,6 +111,7 @@ export class CrearCuentaPage {
       const result = await this.camera.getPicture(opciones);
       this.imageRef = `data:image/jpeg;base64,${result}`;
 
+      console.log("addFotoPerfil. imageRef: "+this.imageRef);
       /*
       const foto = storage().ref(`profilePhotos/${this.email}.jpg`);
       //const foto = storage().ref('profilePhotos/'${this.email});
@@ -168,6 +169,7 @@ export class CrearCuentaPage {
     console.log("Contraseña: " + password);
     console.log("Nombre: " + nombre);
     console.log("Fecha de nacimiento: " + fechaNacimiento);
+    console.log("crearCuenta(). imageRef: "+this.imageRef);
 
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
