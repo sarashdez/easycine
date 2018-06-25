@@ -10,8 +10,9 @@ export class StorageProvider {
   constructor(private cloudStorage : AngularFireStorage,
               private dbStorage : AngularFireDatabase) {}
 
+
   uploadToCloud(refFoto : string, emailUsuario : string): AngularFireUploadTask {
-    return this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto);
+    return this.cloudStorage.ref(`profilePhotos/${emailUsuario}.jpeg`).putString(refFoto);
   }
 
   /*

@@ -109,7 +109,8 @@ export class CrearCuentaPage {
         sourceType: sourceFoto
       }
       const result = await this.camera.getPicture(opciones);
-      this.imageRef = `data:image/jpeg;base64,${result}`;
+      //this.imageRef = `data:image/jpeg;base64,${result}`;
+      this.imageRef = 'data:image/jpeg;base64' + result;
 
       console.log("addFotoPerfil. imageRef: "+this.imageRef);
       /*
