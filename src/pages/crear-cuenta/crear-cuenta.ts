@@ -138,18 +138,30 @@ export class CrearCuentaPage {
    * cámara o desde la galería de su dispositivo) se sube al servidor.
    */
 
+  subirFotoPerfil(email: string) {
+    console.log("subirFotoPerfil. imageRef: "+this.imageRef);
+    let upload = this._STR.uploadToCloud(this.imageRef, email);
+
+    // Perhaps this syntax might change, it's no error here!
+    upload.then().then(res => {
+      this._STR.savePhotoMetadata(res.metadata);
+    });
+  }
+/*
   subirFotoPerfil(userEmail : string) {
 
-    /*
+
     let storageRef = storage().ref();
 
     const foto = storageRef.child(`profilePhotos/${userEmail}.jpg`);
-    foto.putString(this.image, storage.StringFormat.DATA_URL);*/
-  }
+    foto.putString(this.image, storage.StringFormat.DATA_URL);
+  }*/
 
   guardarFechaNacimiento() {
 
   }
+
+
 
   /**
    * Método crearCuenta.
@@ -173,8 +185,8 @@ export class CrearCuentaPage {
 
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
-        //this.subirFotoPerfil(email);
-        this._STR.uploadToCloud(this.imageRef, email);
+        this.subirFotoPerfil(email);
+        //this._STR.uploadToCloud(this.imageRef, email);
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
