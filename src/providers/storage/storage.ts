@@ -12,7 +12,7 @@ export class StorageProvider {
 
 
   uploadToCloud(refFoto : string, emailUsuario : string): AngularFireUploadTask {
-    return this.cloudStorage.ref(`profilePhotos/${emailUsuario}.jpeg`).putString(refFoto);
+    return this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto, 'data_url');
   }
 
   /*

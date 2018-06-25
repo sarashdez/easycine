@@ -99,18 +99,17 @@ export class CrearCuentaPage {
 
     try {
       let opciones : CameraOptions = {
+        quality: 50,
+        targetHeight: 600,
+        targetWidth: 600,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
-        targetWidth: 600,
-        targetHeight: 600,
-        quality: 60,
         correctOrientation: true,
         sourceType: sourceFoto
       }
       const result = await this.camera.getPicture(opciones);
-      //this.imageRef = `data:image/jpeg;base64,${result}`;
-      this.imageRef = 'data:image/jpeg;base64' + result;
+      this.imageRef = `data:image/jpeg;base64,${result}`;
 
       console.log("addFotoPerfil. imageRef: "+this.imageRef);
       /*
