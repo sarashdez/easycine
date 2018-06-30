@@ -49,6 +49,7 @@ export class AutenticacionProvider {
           reject(err);
         });
     });
+    //TODO: MOSTRAR ALERTA SI EL EMAIL YA EXISTE
   }
 
 

@@ -14,11 +14,13 @@ import { CriteriosBusquedaPage } from '../pages/criterios-busqueda/criterios-bus
 import { EligeTuCinePage } from '../pages/elige-tu-cine/elige-tu-cine';
 import { LoginPage } from '../pages/login/login';
 import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
-
-
 import { HomePage } from '../pages/home/home';
 
-
+export interface Perfil {
+  url : string;
+  nombre : string;
+  dob : string;
+}
 
 @Component({
   templateUrl: 'app.html'
@@ -69,4 +71,5 @@ export class MyApp {
     if (!params) params = {};
     this.navCtrl.setRoot(CrearCuentaPage);
   }
+
 }

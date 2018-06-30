@@ -62,9 +62,11 @@ export class LoginPage {
 
     this._AUTH.loginAuth(email, password)
       .then((auth: string) => {
+        this.navCtrl.push(MiPerfilPage, {
+          usuario: email
+        });
         this.form.reset();
         //this.displayForm = false;
-        this.navCtrl.push(MiPerfilPage);
         console.log("Login Correcto");
       })
       .catch((error) => {

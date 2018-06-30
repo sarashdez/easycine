@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
 import { ActionSheetController, NavController } from 'ionic-angular';
 import { FormGroup, FormBuilder } from "@angular/forms";
-
-/*
-import { CarteleraPage } from '../cartelera/cartelera';
-import { DetallePage } from '../detalle/detalle';
-import { TrailerPage } from '../trailer/trailer';
-import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
-import { PaypalPage } from '../paypal/paypal';*/
-//import {DatePicker} from "@ionic-native/date-picker";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
-import { storage } from 'firebase';
-import {StorageProvider} from "../../providers/storage/storage";
+import { StorageProvider } from "../../providers/storage/storage";
+import { MiPerfilPage } from "../mi-perfil/mi-perfil";
+import {finalize} from "rxjs/internal/operators";
+import {Observable} from "rxjs/Rx";
+import {AngularFireStorage} from "angularfire2/storage";
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -20,20 +15,21 @@ import {StorageProvider} from "../../providers/storage/storage";
 })
 export class CrearCuentaPage {
 
-  //Clase nueva
-  public imageRef : string = null;
+  //public urlImagen : string;
+  public refImagen : string = null;
   public displayForm : boolean = true;
   public displayError : string;
   public form: FormGroup;
-  public fotoPerfilExists : string = "Existe foto";
-  //private email: string = null;
+  public fotoPerfilExiste : string = "Existe foto";
+  downloadURL: Observable<string>;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
               public actionSheetCtrl : ActionSheetController,
               private camera : Camera,
               public _AUTH  : AutenticacionProvider,
-              private _STR : StorageProvider ) {
+              private _STR : StorageProvider,
+              private cloudStorage : AngularFireStorage,) {
     this.form = this._FB.group({
       'email' : [''],
       'password' : [''],
@@ -69,8 +65,8 @@ export class CrearCuentaPage {
           text: 'No quiero añadir foto de perfil',
           handler: ()=> {
             console.log("Opción escogida: Sin foto");
-            this.fotoPerfilExists = null;
-            console.log("fotoPerfilExists: "+ this.fotoPerfilExists);
+            this.fotoPerfilExiste = null;
+            console.log("fotoPerfilExiste: "+ this.fotoPerfilExiste);
           }
         }
       ]
@@ -110,41 +106,12 @@ export class CrearCuentaPage {
         sourceType: sourceFoto
       }
       const result = await this.camera.getPicture(opciones);
-      this.imageRef = `data:image/jpeg;base64,${result}`;
-
-      console.log("addFotoPerfil. imageRef: "+this.imageRef);
+      this.refImagen = `data:image/jpeg;base64,${result}`;
     }
     catch(e) {
       console.error(e);
     }
-
-
-
-      /*.then(imageData => {
-        this.image = 'data:image/jpeg;base64,' + imageData;
-      })
-      .catch(error => {
-        console.error(error);
-      });*/
   }
-
-  /**
-   * Método subirFotoPerfil()
-   * La foto obtenida por el usuario durante el proceso de registro (ya sea desde la
-   * cámara o desde la galería de su dispositivo) se sube al servidor.
-   */
-/*
-  subirFotoPerfil(email: string) {
-    console.log("subirFotoPerfil. imageRef: "+this.imageRef);
-    let upload = this._STR.uploadToCloud(this.imageRef, email);
-  }*/
-
-
-
-  guardarFechaNacimiento() {
-
-  }
-
 
 
   /**
@@ -154,38 +121,44 @@ export class CrearCuentaPage {
   crearCuenta() {
     console.log("Metodo crearCuenta()");
 
-    //this.email = this.form.controls['email'].value;
     let email: string = this.form.controls['email'].value;
     let password: string = this.form.controls['password'].value;
     let nombre: string = this.form.controls['nombre'].value;
     let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
-
+/*
     console.log("Valores obtenidos del formulario");
     console.log("Email: " + email);
     console.log("Contraseña: " + password);
     console.log("Nombre: " + nombre);
     console.log("Fecha de nacimiento: " + fechaNacimiento);
-    console.log("crearCuenta(). imageRef: "+this.imageRef);
+    console.log("crearCuenta(). refImagen: "+this.refImagen);*/
 
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
-        //this.subirFotoPerfil(email);
-        console.log("fotoPerfilExists: "+this.fotoPerfilExists);
-        if(this.fotoPerfilExists != null) {
-          this._STR.uploadToCloud(this.imageRef, email);
+        if(this.fotoPerfilExiste != null) {
+          const fileRef = this.cloudStorage.ref(`profilePhotos/${email}`);
+          var uploadTask = this._STR.uploadPhotoToCloud(this.refImagen, email);
+          uploadTask.snapshotChanges().pipe(
+            finalize(() => this.downloadURL = fileRef.getDownloadURL())
+          )
+            .subscribe();
+          console.log("Download urL: "+this.downloadURL);
         }
-        this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email);
-        //this._STR.uploadToCloud(this.imageRef, email);
+        console.log("Download urL: "+this.downloadURL);
+        this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, this.downloadURL);
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
+        this.navCtrl.push(MiPerfilPage, {
+          usuario: email
+        });
         console.log("crearCuenta Correcto");
       })
-      .catch((error) => {
-        //this.displayError = error.message;
-        alert("Tienes que introducir un usuario y contraseña válidos.");
-        console.log("Error crearCuenta");
-        console.log(error.message);
+        .catch((error) => {
+          this.displayError = error.message;
+          alert("Ha habido un error y no se ha podido crear tu cuenta");
+          console.log("Error crearCuenta");
+          console.log(error.message);
       });
   }
 
