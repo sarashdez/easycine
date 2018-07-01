@@ -32,7 +32,7 @@ export class StorageProvider {
     return this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto, 'data_url');
   }
 
-  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, url : string){
+  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, email: string, url : string){
       this.perfiles.doc(email).set({
         dob: dateOfBirth,
         nombre: nombre,
