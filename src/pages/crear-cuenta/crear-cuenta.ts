@@ -142,10 +142,10 @@ export class CrearCuentaPage {
             finalize(() => this.downloadURL = fileRef.getDownloadURL())
           )
             .subscribe();
-          console.log("Download urL: "+this.downloadURL);
+          console.log("Download urL: "+this.downloadURL.toString());
         }
-        console.log("Download urL: "+this.downloadURL);
-        this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email, this.downloadURL);
+        console.log("Download urL: "+this.downloadURL.toString());
+        this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email, this.downloadURL.toString());
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
