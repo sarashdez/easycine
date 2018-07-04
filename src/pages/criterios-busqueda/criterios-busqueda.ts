@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { CarteleraPage } from '../cartelera/cartelera';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import * as moment from 'moment';
+import {EligeTuCinePage} from "../elige-tu-cine/elige-tu-cine";
 
 @Component({
   selector: 'page-criterios-busqueda',
@@ -47,6 +48,10 @@ export class CriteriosBusquedaPage {
       hora : hora,
       cercania : cercania
     });
+  }
+
+  goToEligeTuCine() {
+    this.navCtrl.push(EligeTuCinePage);
   }
 
 

@@ -20,26 +20,19 @@ import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
 import { TrailerPage } from '../pages/trailer/trailer';
 import { PaypalPage } from '../pages/paypal/paypal';
 
-
-
-//import { ScreenOrientation } from "@ionic-native/screen-orientation";
 import { DatePicker } from "@ionic-native/date-picker";
-//import {NativePageTransitions} from "@ionic-native/native-page-transitions";
-/*
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
-import { Transfer } from '@ionic-native/file-transfer';*/
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { environment } from "../environments/environment";
 
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
-import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AutenticacionProvider } from "../providers/autenticacion/autenticacion";
 import { AngularFireStorageModule } from "angularfire2/storage";
 import { StorageProvider } from "../providers/storage/storage";
 import { AngularFirestoreModule } from "angularfire2/firestore";
+
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -92,7 +85,8 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
     Camera,
     ImagePicker,
     AutenticacionProvider,
-    StorageProvider
+    StorageProvider,
+    GoogleMaps
   ]
 })
 export class AppModule {}
