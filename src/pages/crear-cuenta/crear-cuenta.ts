@@ -117,7 +117,7 @@ export class CrearCuentaPage {
   /**
    * Método crearCuenta.
    * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
-   */
+   *//*
   crearCuenta() {
     console.log("Metodo crearCuenta()");
 
@@ -132,11 +132,24 @@ export class CrearCuentaPage {
     console.log("Nombre: " + nombre);
     console.log("Fecha de nacimiento: " + fechaNacimiento);
     console.log("crearCuenta(). refImagen: "+this.refImagen);*/
-
+/*
     this._AUTH.signUp(email, password)
       .then((auth: string) => {
+      ////////////////////////////
         if(this.fotoPerfilExiste != null) {
-          const fileRef = this.cloudStorage.ref(`profilePhotos/${email}`);
+          var storageRef = this.cloudStorage.storage().ref();
+          //this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto, 'data_url');
+          var uploadTask = storageRef.child(`profilePhotos/${email}`).putString(this.refImagen, 'data_url');
+
+// Listen for state changes, errors, and completion of the upload.
+          uploadTask.on( // or 'state_changed'
+            function(snapshot) {
+              // Upload completed successfully, now we can get the download URL
+              uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                console.log('File available at', downloadURL);
+              });
+            });
+          /*const fileRef = this.cloudStorage.ref(`profilePhotos/${email}`);
           var uploadTask = this._STR.uploadPhotoToCloud(this.refImagen, email);
           uploadTask.snapshotChanges().pipe(
             finalize(() => this.downloadURL = fileRef.getDownloadURL())
@@ -144,8 +157,9 @@ export class CrearCuentaPage {
             .subscribe();
           console.log("Download urL: "+this.downloadURL.toString());
         }
-        console.log("Download urL: "+this.downloadURL.toString());
-        this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email, this.downloadURL.toString());
+        console.log("Download urL: "+this.downloadURL.toString());*/
+        /////////////////////////
+        /*this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email, this.downloadURL.toString());
         this.form.reset();
         this.displayForm = false;
         alert("¡Tu cuenta ha sido creada!");
@@ -160,7 +174,7 @@ export class CrearCuentaPage {
           console.log("Error crearCuenta");
           console.log(error.message);
       });
-  }
+  }*/
 
 
 }
