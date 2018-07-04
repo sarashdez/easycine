@@ -58,6 +58,7 @@
     "ionic-angular": "^3.6.1",
     "ionicons": "3.0.0",
     "minimist": "^1.2.0",
+    "moment": "^2.22.2",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
     "sw-toolbox": "3.6.0",

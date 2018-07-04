@@ -42,7 +42,7 @@ export class EligeTuCinePage {
     this.map = GoogleMaps.create('map_canvas', mapOptions);
 
     let marker: Marker = this.map.addMarkerSync({
-      title: 'Ionic',
+      title: 'Sara',
       icon: 'blue',
       animation: 'DROP',
       position: {
