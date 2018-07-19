@@ -17,7 +17,7 @@ export class TrailerPage {
   }
 
   reproducirVideo() {
-    this.youtube.openVideo(this.videoID);
+    this.youtube.openVideo(this.videoID)
   }
 
 
