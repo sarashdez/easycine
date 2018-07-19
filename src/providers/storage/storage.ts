@@ -1,63 +1,85 @@
 import { Injectable } from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from "angularfire2/storage";
-
-//import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database-deprecated";
-
-//import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database-deprecated";
 import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
-//import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn} from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import {Perfil} from "../../app/app.component";
+import { Pelicula } from '../../models/pelicula';
+
 
 @Injectable()
 
 export class StorageProvider {
 
+  peliculasRef : AngularFirestoreCollection<Pelicula>;
+  peliculas$ : Observable<Pelicula[]>;
+
   public perfiles : AngularFirestoreCollection<any>;
- // public perfil : AngularFirestoreDocument<Perfil>;
-  public perfil : Perfil;
+  // public perfil : AngularFirestoreDocument<Perfil>;
+  //public perfil : Perfil;
   private queryPerfil : QueryFn = null;
 
 
   constructor(private cloudStorage : AngularFireStorage,
               private dbStorage : AngularFirestore) {
+    this.peliculasRef = this.dbStorage.collection('infoPeliculas');
+    this.peliculas$ = this.peliculasRef.valueChanges();
+    //////////
     this.perfiles = this.dbStorage.collection('/usuarios');
   }
 
 
+  //CLOUD STORAGE
 
+  /**
+   * Sube la imagen del usuario a Cloud Storage y la almacena utilizando el email de registro
+   * como identificador.
+   * @param refFoto
+   * @param emailUsuario
+   */
   uploadPhotoToCloud(refFoto : string, emailUsuario : string): AngularFireUploadTask {
     return this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto, 'data_url');
   }
 
-  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, email: string, url : string){
-      this.perfiles.doc(email).set({
-        dob: dateOfBirth,
-        nombre: nombre,
-        url: url
-      }).then(function(docRef) {
-        console.log("Documento añadido.");
-      }).catch(function(error) {
-        console.error("Error al añadir documento.");
-      });
+  /**
+   * Recupera la imagen del usuario (url de descarga).
+   */
+  downloadPhotoFromCloud() {
+    //TODO: Obtener enlace de descarga de la imagen
   }
 
+  //TODO: deletePhotoFromCloud
 
 
-  getProfileInfoFromDB(email : string) {
-    console.log("getProfileInfoFromDB");/*
-    //this.perfil = this.dbStorage.collection('/usuarios', ref => ref.where('email', '==', email));
-    this.perfil = this.perfiles.doc(email).get().then(function(doc) {
-      if(doc.exists) {
-        console.log("Datos del documento: "+doc.data());
-      } else {
-        console.log("No existe el documento");
-      }
+
+
+  //FIRESTORE
+
+  /**
+   * Añade los datos de registro del usuario a la base de datos.
+   * @param dateOfBirth
+   * @param nombre
+   * @param email
+   * @param url
+   */
+  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, email: string, url : string){
+    this.perfiles.doc(email).set({
+      dob: dateOfBirth,
+      nombre: nombre,
+      url: url
+    }).then(function(docRef) {
+      console.log("Documento añadido.");
     }).catch(function(error) {
-      console.log("Error getting document:", error);
-    });*/
+      console.error("Error al añadir documento.");
+    });
+  }
+
+  /**
+   * Recupera los datos del usuario de la base de datos.
+   * @param email
+   */
+  getProfileInfoFromDB(email : string) {
+    console.log("getProfileInfoFromDB");
 
     var docRef = this.dbStorage.collection('usuarios').doc(email);
 
@@ -78,23 +100,11 @@ export class StorageProvider {
 
 
     //TODO: RECUPERAR INFO DEL DOCUMENTO
-   /* this.itemscollection.doc(id).ref.get().then(function(doc) {
-      if (doc.exists) {
-        console.log("Document data:", doc.data());
-      } else {
-        console.log("No such document!");
-      }
-    }).catch(function(error) {
-      console.log("Error getting document:", error);
-    });*/
+
 
   }
 
-  /*
-  deleteFromCloud(refFoto : string) {
 
-
-  }*/
 
 
 

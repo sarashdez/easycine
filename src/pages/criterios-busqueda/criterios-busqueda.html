@@ -8,7 +8,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
- <ion-content padding id="page4" style="background-color:#3A286B;">
+<ion-content padding id="page4" style="background-color:#3A286B;">
   <button id="criteriosBusqueda-button3" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToEligeTuCine()">
     Prefiero elegir mi cine
   </button>
@@ -28,20 +28,23 @@
     <!--<div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer2"></div>
 
     <div id="criteriosBusqueda-markdown8" class="show-list-numbers-and-dots">-->
-      <p style="color:#FFFFFF;">
-        ¿Qué día quieres ir al cine?
-      </p>
+    <p style="color:#FFFFFF;">
+      ¿Qué día quieres ir al cine?
+    </p>
     <!--</div>-->
 
     <ion-item id="criteriosBusqueda_dia">
       <ion-datetime formControlName="dia" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" placeholder="01/01/2000"></ion-datetime>
     </ion-item>
 
-    <!--<div id="criteriosBusqueda-markdown2" class="show-list-numbers-and-dots"> -->
-      <p style="color:#FFFFFF;">
-        ¿A partir de qué hora quieres ir?
-      </p>
-    <!--</div>-->
+    <ion-item>
+      <ion-label>Me da igual el día</ion-label>
+      <ion-checkbox formControlName="diaChecked"></ion-checkbox>
+    </ion-item>
+
+    <p style="color:#FFFFFF;">
+      ¿A partir de qué hora quieres ir?
+    </p>
     <ion-item id="criteriosBusqueda-select2">
       <ion-label>
         Hora
@@ -57,12 +60,12 @@
         <ion-option>Indiferente</ion-option>
       </ion-select>
     </ion-item>
-   <!-- <div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer3"></div>
-    <div id="criteriosBusqueda-markdown3" class="show-list-numbers-and-dots"> -->
-      <p style="color:#FFFFFF;">
-        Cercanía (se tendrá en cuenta tu ubicación actual)
-      </p>
-   <!-- </div> -->
+    <!-- <div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer3"></div>
+     <div id="criteriosBusqueda-markdown3" class="show-list-numbers-and-dots"> -->
+    <p style="color:#FFFFFF;">
+      Cercanía (se tendrá en cuenta tu ubicación actual)
+    </p>
+    <!-- </div> -->
     <ion-item id="criteriosBusqueda-select3">
       <ion-label>
         Cercanía
@@ -74,7 +77,7 @@
     </ion-item>
     <!--<div class="spacer" style="width:300px;height:30px;" id="criteriosBusqueda-spacer4"></div>-->
   </form>
-   <div class="spacer" style="width:300px;height:30px;" id="criteriosBusqueda-spacer4"></div>
+  <div class="spacer" style="width:300px;height:30px;" id="criteriosBusqueda-spacer4"></div>
   <button id="criteriosBusqueda-button4" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToCartelera()">
     Siguiente
   </button>

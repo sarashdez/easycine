@@ -14,13 +14,27 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Cartelera</ion-title>
-        <!--<button ion-button icon-only color="royal">
-          <ion-icon name="person-add"></ion-icon>
-        </button>
-      </ion-buttons> -->
+    <!--<button ion-button icon-only color="royal">
+      <ion-icon name="person-add"></ion-icon>
+    </button>
+  </ion-buttons> -->
   </ion-toolbar>
 
 </ion-header>
+
+<ion-content padding id="page6" style="background-color:#3A286B;">
+  <!-- PRUEBAS -->
+  <ul>
+    <li *ngFor="let item of pruebas | async">
+      {{item.titulo}}
+      <!--{{item.empresa}}
+      {{item.lugar}}
+      {{item.hora}}-->
+    </li>
+  </ul>
+</ion-content>
+
+<!-- ORIGINAL
 <ion-content padding id="page6" style="background-color:#3A286B;">
   <ion-list id="cartelera-list4">
     <ion-item color="none" on-click="goToDetalle()" id="cartelera-list-item13">
@@ -32,4 +46,4 @@
       </h2>
     </ion-item>
   </ion-list>
-</ion-content>
+</ion-content>-->

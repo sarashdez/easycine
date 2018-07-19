@@ -16,18 +16,13 @@ import { LoginPage } from '../pages/login/login';
 import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
 import { HomePage } from '../pages/home/home';
 
-export interface Perfil {
-  url : string;
-  nombre : string;
-  dob : string;
-}
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
-    rootPage:any = HomePage;
+  rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

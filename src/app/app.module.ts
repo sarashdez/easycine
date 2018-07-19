@@ -33,6 +33,7 @@ import { StorageProvider } from "../providers/storage/storage";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     ImagePicker,
     AutenticacionProvider,
     StorageProvider,
-    GoogleMaps
+    GoogleMaps,
+    Geolocation
   ]
 })
 export class AppModule {}
