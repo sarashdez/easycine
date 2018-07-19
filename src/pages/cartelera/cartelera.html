@@ -25,8 +25,8 @@
 <ion-content padding id="page6" style="background-color:#3A286B;">
   <!-- PRUEBAS -->
   <ul>
-    <li *ngFor="let item of pruebas | async">
-      {{item.titulo}}
+    <li *ngFor="let item of peliculasCercania | async" (click)="goToDetalle(item)">
+      {{item.peliculaID}}
       <!--{{item.empresa}}
       {{item.lugar}}
       {{item.hora}}-->

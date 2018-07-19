@@ -8,6 +8,7 @@ import {BehaviorSubject, Observable} from "rxjs/Rx";
 import { switchMap } from 'rxjs/operators';
 import {Proyeccion} from "../../models/proyeccion";
 import {ItemCartelera} from "../../models/itemCartelera";
+import {DetallePage} from "../detalle/detalle";
 
 
 @Component({
@@ -66,7 +67,7 @@ export class CarteleraPage {
       console.log("Cercania: "+this.cercania);
       //Se hace busqueda
       this.busquedaCarteleraConCriterios(this.empresa, this.dia, this.hora, this.cercania);
-      this.getCartelera();
+      //this.getCartelera();
     }
 
   }
@@ -168,7 +169,8 @@ export class CarteleraPage {
 
 
 
-  getCartelera() {
+
+  /*getCartelera() {
     console.log("getCartelera()");
 
     this.pruebas = this.peliculasCercania.map(proyecciones =>
@@ -199,7 +201,12 @@ export class CarteleraPage {
         return this.cartelera;
       })
     );
-  }
+  }*/
 
+  goToDetalle(pelicula) {
+    console.log("Metodo goToDetalle");
+    this.navCtrl.push(DetallePage, {
+      peliculaSeleccionada: pelicula})
+  }
 
 }

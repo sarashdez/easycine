@@ -34,6 +34,7 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
 
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
+import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     AutenticacionProvider,
     StorageProvider,
     GoogleMaps,
-    Geolocation
+    Geolocation,
+    YoutubeVideoPlayer
   ]
 })
 export class AppModule {}

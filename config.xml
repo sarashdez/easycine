@@ -19,6 +19,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="YouTubeDataApiKey" value="AIzaSyC8Qov_FVGoPcLiAH_jGPR2ty9u_jbihKo" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -99,4 +100,5 @@
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Uso de la localizacion para poder usar la funcionalidad completa de la app" />
     </plugin>
+    <plugin name="cordova-plugin-youtube-video-player" spec="^1.0.6" />
 </widget>

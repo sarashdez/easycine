@@ -11,26 +11,37 @@
     </ion-buttons>-->
 
     <ion-title>
-      Detalle
+      {{ item.peliculaID }}
     </ion-title>
 
   </ion-navbar>
 </ion-header>
 
 <ion-content padding id="page7" style="background-color:#3A286B;">
+  <h4 id="detalle-heading45" style="color:#FFFFFF;">
+    INFORMACIÓN DE LA PROYECCIÓN:
+  </h4>
   <h4 id="detalle-heading4" style="color:#FFFFFF;">
     Ubicación
   </h4>
   <h4 id="detalle-heading5" style="color:#FFFFFF;font-weight:300;">
-    ubicacion
+    {{ item.empresa }} - {{ item.lugar }}
   </h4>
   <h4 id="detalle-heading6" style="color:#FFFFFF;">
     Hora
   </h4>
   <h4 id="detalle-heading7" style="color:#FFFFFF;font-weight:300;">
-    hora
+    {{ item.hora }}
   </h4>
-  <div class="spacer" style="width:300px;height:21px;" id="detalle-spacer7"></div>
+  <h4 id="detalle-heading85" style="color:#FFFFFF;">
+    INFORMACIÓN DE LA PELÍCULA:
+  </h4>
+  <h4 id="detalle-heading86" style="color:#FFFFFF;">
+    Sinopsis
+  </h4>
+  <h4 id="detalle-heading116" style="color:#FFFFFF;font-weight:300;">
+    sinopsis
+  </h4>
   <h4 id="detalle-heading8" style="color:#FFFFFF;">
     Director
   </h4>
