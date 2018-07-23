@@ -5,7 +5,7 @@ import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
 
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
-import { PaypalPage } from '../paypal/paypal';
+
 import { EligeTuCinePage } from '../elige-tu-cine/elige-tu-cine';
 
 @Component({
@@ -28,9 +28,6 @@ export class HomePage {
   }goToComprarEntradas(params){
     if (!params) params = {};
     this.navCtrl.push(ComprarEntradasPage);
-  }goToPaypal(params){
-    if (!params) params = {};
-    this.navCtrl.push(PaypalPage);
   }goToEligeTuCine(params){
     if (!params) params = {};
     this.navCtrl.push(EligeTuCinePage);

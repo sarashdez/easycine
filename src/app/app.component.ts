@@ -7,7 +7,7 @@ import { CarteleraPage } from '../pages/cartelera/cartelera';
 import { DetallePage } from '../pages/detalle/detalle';
 
 import { ComprarEntradasPage } from '../pages/comprar-entradas/comprar-entradas';
-import { PaypalPage } from '../pages/paypal/paypal';
+
 import { ProximosEstrenosPage } from '../pages/proximos-estrenos/proximos-estrenos';
 import { MisEntradasPage } from '../pages/mis-entradas/mis-entradas';
 import { CriteriosBusquedaPage } from '../pages/criterios-busqueda/criterios-busqueda';
@@ -41,9 +41,6 @@ export class MyApp {
   }goToComprarEntradas(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ComprarEntradasPage);
-  }goToPaypal(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(PaypalPage);
   }goToProximosEstrenos(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ProximosEstrenosPage);

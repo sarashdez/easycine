@@ -17,7 +17,6 @@ import { ComprarEntradasPage } from '../pages/comprar-entradas/comprar-entradas'
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
 import { LoginPage } from '../pages/login/login';
 import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
-import { PaypalPage } from '../pages/paypal/paypal';
 
 import { DatePicker } from "@ionic-native/date-picker";
 import { Camera } from '@ionic-native/camera';
@@ -49,8 +48,7 @@ import {PayPal} from "@ionic-native/paypal";
     ComprarEntradasPage,
     MiPerfilPage,
     LoginPage,
-    CrearCuentaPage,
-    PaypalPage
+    CrearCuentaPage
   ],
   imports: [
     BrowserModule,
@@ -74,8 +72,7 @@ import {PayPal} from "@ionic-native/paypal";
     ComprarEntradasPage,
     MiPerfilPage,
     LoginPage,
-    CrearCuentaPage,
-    PaypalPage
+    CrearCuentaPage
   ],
   providers: [
     StatusBar,

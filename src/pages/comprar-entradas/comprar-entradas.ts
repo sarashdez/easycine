@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
+import { AlertController, NavController, NavParams, ViewController } from 'ionic-angular';
+
 import { FormBuilder, FormGroup } from "@angular/forms";
-import {PayPal, PayPalConfiguration, PayPalPayment} from "@ionic-native/paypal";
+import { PayPal, PayPalConfiguration, PayPalPayment } from "@ionic-native/paypal";
 
 
 @Component({
@@ -119,10 +120,4 @@ export class ComprarEntradasPage {
     confirm.present();
   }
 
-/*
-  goToPaypal(params){
-    if (!params) params = {};
-    this.calcularPrecioTotal();
-    this.navCtrl.push(PaypalPage);
-  }*/
 }

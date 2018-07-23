@@ -4,7 +4,7 @@ import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
 
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
-import { PaypalPage } from '../paypal/paypal';
+
 import { CrearCuentaPage } from '../crear-cuenta/crear-cuenta';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AutenticacionProvider} from "../../providers/autenticacion/autenticacion";
