@@ -44,7 +44,7 @@ export class ComprarEntradasPage {
     console.log("Metodo confirmarContinuar()");
     let confirm = this.alertCtrl.create({
       title: 'Continuar con el pago',
-      message: 'El total de tu compra es '+this.precioTotal+'€. El proceso de pago se realiza con Paypal, por lo que necesitas disponer de una cuenta en Paypal para poder completarlo. ¿Deseas continuar?',
+      message: 'El total de tu compra es '+this.precioTotal+'€. El proceso de pago se realiza con Paypal, ¿deseas continuar?',
       buttons: [
         {
           text: 'No',
@@ -74,7 +74,7 @@ export class ComprarEntradasPage {
       this.paypal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
 
       })).then(() => {
-        let payment = new PayPalPayment(this.precioTotal.toString(), 'EUR', 'Entradas cine', 'sale');
+        let payment = new PayPalPayment(this.precioTotal.toString(), 'EUR', 'Entradas de cine (EasyCine)', 'sale');
         this.paypal.renderSinglePaymentUI(payment).then(() => {
           //Pago hecho con exito
           let titulo : string  = 'Pago realizado';
