@@ -76,20 +76,48 @@ export class ComprarEntradasPage {
         let payment = new PayPalPayment(this.precioTotal.toString(), 'EUR', 'Entradas cine', 'sale');
         this.paypal.renderSinglePaymentUI(payment).then(() => {
           //Pago hecho con exito
+          let titulo : string  = 'Pago realizado';
+          let mensaje : string = 'El pago se ha realizado con éxito. Tus entradas están disponibles en "Mis entradas".';
+          this.alertaProcesoDePago(titulo, mensaje);
         }, () => {
           //Error en el pago
           console.log("Error en el pago");
+          let titulo : string = 'Pago fallido';
+          let mensaje : string = 'El pago no ha podido completarse. Por favor, inténtelo de nuevo.';
+          this.alertaProcesoDePago(titulo, mensaje);
         });
       }, () => {
         //Error en la configuracion
         console.log("Error en la configuracion");
+        let titulo : string = 'Proceso erróneo';
+        let mensaje : string = 'Ha habido un error interno, lo arreglaremos en la mayor brevedad posible. Disculpe por las molestias.';
+        this.alertaProcesoDePago(titulo, mensaje);
       });
     }, () => {
       //Error en la inicializacion
       console.log("Error en la inicializacion");
+      let titulo : string = 'Proceso erróneo';
+      let mensaje : string = 'No se ha podido inicializar el servicio de pago con Paypal. Por favor, inténtelo más tarde.';
+      this.alertaProcesoDePago(titulo, mensaje);
     });
   }
 
+  alertaProcesoDePago(titulo : string, mensaje : string) {
+    console.log("Metodo alertaProcesoDePago()");
+    let confirm = this.alertCtrl.create({
+      title: titulo,
+      message: mensaje,
+      buttons: [
+        {
+          text: '¡Vale!',
+          handler: () => {
+            console.log('"¡Vale!" pulsado');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
 /*
   goToPaypal(params){
