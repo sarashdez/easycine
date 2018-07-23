@@ -3,7 +3,11 @@ import { AlertController, NavController, NavParams, ViewController } from 'ionic
 
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PayPal, PayPalConfiguration, PayPalPayment } from "@ionic-native/paypal";
-
+import { File } from "@ionic-native/file";
+import { FileOpener } from "@ionic-native/file-opener";
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'page-comprar-entradas',
@@ -16,13 +20,17 @@ export class ComprarEntradasPage {
   private precio : number = 8;
   private numEntradas : string;
   private precioTotal : number;
+  private pdf : any;
+
 
   constructor(public navCtrl: NavController,
               public param: NavParams,
               private viewCtrl: ViewController,
               private _FB : FormBuilder,
               private alertCtrl: AlertController,
-              private paypal : PayPal) {
+              private paypal : PayPal,
+              private file: File,
+              private fileOpener : FileOpener) {
     this.item = param.get("pelicula");
     console.log("constructorDetalle item recuperado: "+this.item.peliculaID);
     this.form = this._FB.group({
@@ -80,6 +88,8 @@ export class ComprarEntradasPage {
           let titulo : string  = 'Pago realizado';
           let mensaje : string = 'El pago se ha realizado con éxito. Tus entradas están disponibles en "Mis entradas".';
           this.alertaProcesoDePago(titulo, mensaje);
+          this.crearEntradaPDF();
+          this.descargarEntradaPDF();
         }, () => {
           //Error en el pago
           console.log("Error en el pago");
@@ -118,6 +128,51 @@ export class ComprarEntradasPage {
       ]
     });
     confirm.present();
+  }
+
+  crearEntradaPDF() {
+    var docDefinition = {
+      content: [
+        //Encabezado del pdf
+        { text: 'EasyCine - Entradas', style: 'header', alignment: 'center'},
+        { text: this.item.peliculaID, style: 'subheader', alignment: 'center'},
+
+        //Cuerpo del pdf
+        { text: 'Local: '+this.item.empresa+' - '+this.item.lugar, style: 'text', alignment: 'left'},
+        { text: 'Día: '+this.item.dia, style: 'text', alignment: 'left'},
+        { text: 'Hora: '+this.item.hora, style: 'text', alignment: 'left'},
+        { text: 'Número de entradas: '+this.numEntradas, style: 'text', alignment: 'left'},
+        { text: 'Precio final: '+this.precioTotal+'(Pago realizado con éxito).', style: 'text', alignment: 'left'}
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true
+        },
+        subheader: {
+          fontSize: 15,
+          bold: true
+        },
+        text: {
+          fontSize: 13,
+          margin: [0,15,0,0]
+        }
+      }
+    }
+
+    this.pdf = pdfMake.createPdf(docDefinition);
+  }
+
+  descargarEntradaPDF() {
+    this.pdf.getBuffer((buffer) => {
+      var utf8 = new Uint8Array(buffer);
+      var binaryArray = utf8.buffer;
+      var blob = new Blob([binaryArray], {type: 'application/pdf'});
+
+      this.file.writeFile(this.file.dataDirectory, 'misEntradas.pdf', blob, {replace: true}).then(fileEntry => {
+        this.fileOpener.open(this.file.dataDirectory+'misEntradas.pdf','application/pdf');
+      })
+    });
   }
 
 }

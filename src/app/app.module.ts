@@ -32,8 +32,11 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
 
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
-import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
-import {PayPal} from "@ionic-native/paypal";
+import { YoutubeVideoPlayer } from "@ionic-native/youtube-video-player";
+import { PayPal } from "@ionic-native/paypal";
+import { File } from "@ionic-native/file";
+import { FileOpener } from "@ionic-native/file-opener";
+
 
 @NgModule({
   declarations: [
@@ -86,7 +89,9 @@ import {PayPal} from "@ionic-native/paypal";
     GoogleMaps,
     Geolocation,
     YoutubeVideoPlayer,
-    PayPal
+    PayPal,
+    File,
+    FileOpener
   ]
 })
 export class AppModule {}
