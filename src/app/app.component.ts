@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { CarteleraPage } from '../pages/cartelera/cartelera';
 import { DetallePage } from '../pages/detalle/detalle';
-import { TrailerPage } from '../pages/trailer/trailer';
+
 import { ComprarEntradasPage } from '../pages/comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../pages/paypal/paypal';
 import { ProximosEstrenosPage } from '../pages/proximos-estrenos/proximos-estrenos';
@@ -38,9 +38,6 @@ export class MyApp {
   }goToDetalle(params){
     if (!params) params = {};
     this.navCtrl.setRoot(DetallePage);
-  }goToTrailer(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(TrailerPage);
   }goToComprarEntradas(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ComprarEntradasPage);

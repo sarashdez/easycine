@@ -17,7 +17,6 @@ import { ComprarEntradasPage } from '../pages/comprar-entradas/comprar-entradas'
 import { MiPerfilPage } from '../pages/mi-perfil/mi-perfil';
 import { LoginPage } from '../pages/login/login';
 import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
-import { TrailerPage } from '../pages/trailer/trailer';
 import { PaypalPage } from '../pages/paypal/paypal';
 
 import { DatePicker } from "@ionic-native/date-picker";
@@ -50,7 +49,6 @@ import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
     MiPerfilPage,
     LoginPage,
     CrearCuentaPage,
-    TrailerPage,
     PaypalPage
   ],
   imports: [
@@ -76,7 +74,6 @@ import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
     MiPerfilPage,
     LoginPage,
     CrearCuentaPage,
-    TrailerPage,
     PaypalPage
   ],
   providers: [

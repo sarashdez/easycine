@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
-import { TrailerPage } from '../trailer/trailer';
+
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
-//import { PaypalPage } from '../paypal/paypal';
+import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
 import {CarteleraPage} from "../cartelera/cartelera";
-//import {NativePageTransitions} from "@ionic-native/native-page-transitions";
 
 @Component({
   selector: 'page-detalle',
@@ -13,26 +12,24 @@ import {CarteleraPage} from "../cartelera/cartelera";
 export class DetallePage {
 
   private item : any;
+  videoID : string = '1sUbOSVTdgg';
 
   constructor(public navCtrl: NavController,
               public param: NavParams,
-              private viewCtrl: ViewController) {
+              private viewCtrl: ViewController,
+              private youtube: YoutubeVideoPlayer) {
     this.item = param.get("peliculaSeleccionada");
     console.log("constructorDetalle item recuperado: "+this.item.peliculaID);
   }
 
-
-
-
-
-
-
-
-
-
-  goToTrailer(){
-    this.navCtrl.push(TrailerPage);
+  reproducirVideo() {
+    this.youtube.openVideo(this.videoID)
   }
+
+
+
+
+
 
   goToComprarEntradas(params){
     if (!params) params = {};
