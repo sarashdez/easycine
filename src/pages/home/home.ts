@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { CriteriosBusquedaPage } from '../criterios-busqueda/criterios-busqueda';
 import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
-import { TrailerPage } from '../trailer/trailer';
+
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';
 import { EligeTuCinePage } from '../elige-tu-cine/elige-tu-cine';
@@ -25,9 +25,6 @@ export class HomePage {
   }goToDetalle(params){
     if (!params) params = {};
     this.navCtrl.push(DetallePage);
-  }goToTrailer(params){
-    if (!params) params = {};
-    this.navCtrl.push(TrailerPage);
   }goToComprarEntradas(params){
     if (!params) params = {};
     this.navCtrl.push(ComprarEntradasPage);

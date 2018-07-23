@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, ViewController} from 'ionic-angular';
 import { CarteleraPage } from '../cartelera/cartelera';
 import { DetallePage } from '../detalle/detalle';
-import { TrailerPage } from '../trailer/trailer';
+
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import { PaypalPage } from '../paypal/paypal';
 import { CrearCuentaPage } from '../crear-cuenta/crear-cuenta';
