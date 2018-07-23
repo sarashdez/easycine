@@ -101,4 +101,5 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Uso de la localizacion para poder usar la funcionalidad completa de la app" />
     </plugin>
     <plugin name="cordova-plugin-youtube-video-player" spec="^1.0.6" />
+    <plugin name="com.paypal.cordova.mobilesdk" spec="^3.5.0" />
 </widget>

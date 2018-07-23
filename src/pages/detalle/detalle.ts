@@ -27,13 +27,10 @@ export class DetallePage {
   }
 
 
-
-
-
-
-  goToComprarEntradas(params){
-    if (!params) params = {};
-    this.navCtrl.push(ComprarEntradasPage);
+  goToComprarEntradas(){
+    this.navCtrl.push(ComprarEntradasPage, {
+      pelicula : this.item
+    });
   }
 
 }
