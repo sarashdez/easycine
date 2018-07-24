@@ -25,7 +25,7 @@ export class CrearCuentaPage {
   private nombre : string;
   private fechaNacimiento : string;
   private refImagen : string;
-  private urlImagen : string;
+  private urlImagen : Observable<any>;
 
 
   //public urlImagen : string;
@@ -138,18 +138,19 @@ export class CrearCuentaPage {
           ////////////////////////////
           //Se sube la imagen a Firebase.
           this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url');
-          firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().then(url => {
+          this.urlImagen = this.cloudStorage.ref(`profilePhotos/${this.email}`).getDownloadURL();
+          /*firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().then(url => {
             console.log("URL recuperada de Firebase: "+url);
             alert("URL recuperada de Firebase: "+url);
             this.urlImagen = url
-          })
-
+          })*/
+          console.log("url: "+this.urlImagen.toString());
           alert("URL antes de subir a BBDD: "+this.urlImagen);
           ////////////////////////////
             let userID = session.uid;
             console.log("Usuario creado: "+userID);
             console.log("Url imagen antes subir ddbb: "+this.urlImagen);
-            this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, this.urlImagen);
+            this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, '');
             this.form.reset();
             alert("¡Tu cuenta ha sido creada!");
             this.navCtrl.push(CarteleraPage);
