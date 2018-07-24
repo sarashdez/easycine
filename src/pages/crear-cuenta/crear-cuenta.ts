@@ -9,6 +9,8 @@ import {finalize} from "rxjs/internal/operators";
 import {Observable} from "rxjs/Rx";
 import {AngularFireStorage} from "angularfire2/storage";
 import * as moment from 'moment';
+import {CarteleraPage} from "../cartelera/cartelera";
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -39,7 +41,8 @@ export class CrearCuentaPage {
               private camera : Camera,
               public _AUTH  : AutenticacionProvider,
               private _STR : StorageProvider,
-              private cloudStorage : AngularFireStorage) {
+              private cloudStorage : AngularFireStorage,
+              private _ANGFIRE: AngularFireAuth) {
     this.form = this._FB.group({
       'email' : [''],
       'password' : [''],
@@ -136,9 +139,24 @@ export class CrearCuentaPage {
             this.urlImagen = snapshot.getDownloadURL();
             alert("URL obtenida: "+this.urlImagen);
             console.log("URL obtenida: "+this.urlImagen);
-
-        });
+        });/*
+        var userID : string = this._ANGFIRE.authState.subscribe(session => {
+          if(session) {
+            //Usuario logueado
+            let uID = session.uid;
+            console.log("Usuario logueado: "+uID);
+            return this.uID;
+          } else {
+            console.log("Ningun usuario logueado");
+            return null;
+          }
+        }); */
+        this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, this.email, this.urlImagen);
+        this.form.reset();
+        alert("¡Tu cuenta ha sido creada!");
+        this.navCtrl.push(CarteleraPage);
       });
+
   }
 
   /**
