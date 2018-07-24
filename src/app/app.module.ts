@@ -34,8 +34,6 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { YoutubeVideoPlayer } from "@ionic-native/youtube-video-player";
 import { PayPal } from "@ionic-native/paypal";
-import { File } from "@ionic-native/file";
-import { FileOpener } from "@ionic-native/file-opener";
 
 
 @NgModule({
@@ -82,8 +80,6 @@ import { FileOpener } from "@ionic-native/file-opener";
     SplashScreen,
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    File,
-    FileOpener,
     Camera,
     ImagePicker,
     AutenticacionProvider,
@@ -91,7 +87,7 @@ import { FileOpener } from "@ionic-native/file-opener";
     GoogleMaps,
     Geolocation,
     YoutubeVideoPlayer,
-    PayPal,
+    PayPal
 
   ]
 })

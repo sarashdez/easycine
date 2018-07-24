@@ -18,6 +18,7 @@ export class StorageProvider {
   // public perfil : AngularFirestoreDocument<Perfil>;
   //public perfil : Perfil;
   private queryPerfil : QueryFn = null;
+  private entradas : AngularFirestoreCollection<any>;
 
 
   constructor(private cloudStorage : AngularFireStorage,
@@ -26,6 +27,7 @@ export class StorageProvider {
     this.peliculas$ = this.peliculasRef.valueChanges();
     //////////
     this.perfiles = this.dbStorage.collection('/usuarios');
+    this.entradas = this.dbStorage.collection('/entradas');
   }
 
 
@@ -83,26 +85,47 @@ export class StorageProvider {
 
     var docRef = this.dbStorage.collection('usuarios').doc(email);
 
-    docRef.ref.get().then(function(doc) {
+    docRef.ref.get().then(function (doc) {
       if (doc.exists) {
         console.log("Document data:", doc.data());
-        console.log("Nombre: "+doc.data().nombre);
-        console.log("Email: "+doc.data().email);
-        console.log("DOB: "+doc.data().dob);
+        console.log("Nombre: " + doc.data().nombre);
+        console.log("Email: " + doc.data().email);
+        console.log("DOB: " + doc.data().dob);
         return doc;
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
       }
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log("Error getting document:", error);
     });
-
+  }
 
     //TODO: RECUPERAR INFO DEL DOCUMENTO
 
 
-  }
+    /**
+     * Añade la entrada comprada a la base de datos.
+     * @param dateOfBirth
+     * @param nombre
+     * @param email
+     * @param url
+     */
+    uploadEntradaToDB(email: string, cantidad: string, dia: string, empresa: string, hora: string, lugar: string, pelicula: string){
+      this.entradas.doc(email).set({
+        cantidad: cantidad,
+        dia: dia,
+        empresa: empresa,
+        hora: hora,
+        lugar: lugar,
+        pelicula: pelicula
+      }).then(function(docRef) {
+        console.log("Documento añadido.");
+      }).catch(function(error) {
+        console.error("Error al añadir documento.");
+      });
+    }
+
 
 
 
