@@ -11,6 +11,7 @@ import {AngularFireStorage} from "angularfire2/storage";
 import * as moment from 'moment';
 import {CarteleraPage} from "../cartelera/cartelera";
 import {AngularFireAuth} from "angularfire2/auth";
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -136,12 +137,9 @@ export class CrearCuentaPage {
         this._ANGFIRE.authState.subscribe(session => {
           ////////////////////////////
           //Se sube la imagen a Firebase.
-          this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url').
-          then((snapshot: any) => {
-            this.urlImagen = snapshot.downloadURL;
-            alert("URL obtenida: "+this.urlImagen);
-            console.log("URL obtenida: "+this.urlImagen);
-          });
+          this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url');
+          this.urlImagen = firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().toString();
+
           alert("URL antes de subir a BBDD: "+this.urlImagen);
           ////////////////////////////
             let userID = session.uid;
