@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import {NavController, ViewController} from 'ionic-angular';
+import {AlertController, NavController, ViewController} from 'ionic-angular';
 import { CarteleraPage } from '../cartelera/cartelera';
-import { DetallePage } from '../detalle/detalle';
-
-import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
-
 import { CrearCuentaPage } from '../crear-cuenta/crear-cuenta';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AutenticacionProvider} from "../../providers/autenticacion/autenticacion";
-import {MiPerfilPage} from "../mi-perfil/mi-perfil";
 
 
 @Component({
@@ -24,50 +19,26 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               private viewCtrl: ViewController,
               private _FB: FormBuilder,
-              public _AUTH: AutenticacionProvider) {
+              public _AUTH: AutenticacionProvider,
+              private alertCtrl: AlertController) {
     this.form = this._FB.group({
       'email':[''],
       'password':['']
     })
   }
 
-  /////////////
-  /*constructor(public navCtrl: NavController,
-              private _FB   : FormBuilder,
-              public _AUTH  : AutenticacionProvider)
-  {
-    this.form = this._FB.group({
-      'email'    : [''],
-      'password' : ['']
-    })
-  }*/
-  /////////////
-
-  ionViewWillEnter() {
-    this.viewCtrl.showBackButton(true);
-  }
-
-  //METODO LOGIN
+  /**
+   * Inicia la sesion del usuario en la app.
+   */
   login() {
-    console.log("Metodo login()");
-    /*let email   : any = this.form.controls['email'].value,
-      password  : any = this.form.controls['password'].value;*/
     let email : string = this.form.controls['email'].value;
     let password : string = this.form.controls['password'].value;
 
-    console.log("Valores obtenidos del formulario");
-    console.log("Email: " + email);
-    console.log("Contraseña: " + password);
-    //console.log('Datos metodo LOGIN: '+ email + ' ' + password );
-
     this._AUTH.loginAuth(email, password)
       .then((auth: string) => {
-        this.navCtrl.push(MiPerfilPage, {
-          usuario: email
-        });
         this.form.reset();
-        //this.displayForm = false;
         console.log("Login Correcto");
+        this.alertaLoginCorrecto();
       })
       .catch((error) => {
         this.displayError = error.message;
@@ -77,32 +48,39 @@ export class LoginPage {
       });
   }
 
-  goToCartelera(params){
-    if (!params) params = {};
+  /**
+   * Navegacion a la pantalla Cartelera.
+   */
+  goToCartelera(){
     this.navCtrl.push(CarteleraPage);
-  }/**goToDetalle(params){
-    if (!params) params = {};
-    this.navCtrl.push(DetallePage);
-  }goToTrailer(params){
-    if (!params) params = {};
-    this.navCtrl.push(TrailerPage);
-  }goToComprarEntradas(params){
-    if (!params) params = {};
-    this.navCtrl.push(ComprarEntradasPage);
-  }goToPaypal(params){
-    if (!params) params = {};
-    this.navCtrl.push(PaypalPage);
-  }*/goToCrearCuenta(params){
-    if (!params) params = {};
+  }
+
+  /**
+   * Navegacion a la pantalla CrearCuenta.
+   */
+  goToCrearCuenta(){
     this.navCtrl.push(CrearCuentaPage);
   }
 
-  goBack() {
-    console.log("Metodo goBack");
-    this.navCtrl.push(CarteleraPage);
+  /**
+   * Alerta que aparece cuando el usuario inicia la sesion correctamente. Redirige al usuario a
+   * la pagina Cartelera.
+   */
+  alertaLoginCorrecto() {
+    console.log("Metodo alertaLoginCorrecto()");
+    let confirm = this.alertCtrl.create({
+      message: '¡Has iniciado sesión correctamente',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('"Ok" pulsado');
+            this.goToCartelera();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
-/*
-  showBackButton() {
 
-  }*/
 }

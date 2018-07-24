@@ -1,19 +1,12 @@
 <ion-header>
   <ion-navbar>
 
-    <ion-buttons left>
-      <button ion-button icon-only (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-
     <ion-title>
       Login
     </ion-title>
 
   </ion-navbar>
 </ion-header>
-
 
 <ion-content padding id="page13" style="background-color:#3A286B;">
   <form id="formLogin" [formGroup]="form">
@@ -31,7 +24,6 @@
         <ion-input formControlName="password" type="password" placeholder=""></ion-input>
       </ion-item>
     </ion-list>
-    <!--<div class="spacer" style="height:8px;" id="login-spacer12"></div>-->
   </form>
     <button id="login-button10" ion-button color="light" block style="color:#291F70;" on-click="login()">
       Iniciar sesión
