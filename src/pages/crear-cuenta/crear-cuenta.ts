@@ -138,7 +138,11 @@ export class CrearCuentaPage {
           ////////////////////////////
           //Se sube la imagen a Firebase.
           this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url');
-          this.urlImagen = firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().toString();
+          firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().then(url => {
+            console.log("URL recuperada de Firebase: "+url);
+            alert("URL recuperada de Firebase: "+url);
+            this.urlImagen = url
+          })
 
           alert("URL antes de subir a BBDD: "+this.urlImagen);
           ////////////////////////////
