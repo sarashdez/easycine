@@ -142,19 +142,14 @@ export class CrearCuentaPage {
           firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().then(url => {
             console.log("URL recuperada de Firebase: "+url);
             alert("URL recuperada de Firebase: "+url);
-            this.urlImagen = url
-          })
-          /*
-          console.log("url: "+url);
-          alert("URL antes de subir a BBDD: "+this.urlImagen);*/
-          ////////////////////////////
             let userID = session.uid;
             console.log("Usuario creado: "+userID);
             console.log("Url imagen antes subir ddbb: "+this.urlImagen);
-            this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, '');
+            this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, url);
             this.form.reset();
             alert("¡Tu cuenta ha sido creada!");
             this.navCtrl.push(CarteleraPage);
+          });
         });
       });
 
