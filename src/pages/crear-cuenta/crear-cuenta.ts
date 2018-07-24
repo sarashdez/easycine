@@ -132,15 +132,18 @@ export class CrearCuentaPage {
 
     this._AUTH.signUp(this.email, this.password)
       .then((auth: string) => {
-        //Se sube la imagen a Firebase.
-        this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url').
+
+        this._ANGFIRE.authState.subscribe(session => {
+          ////////////////////////////
+          //Se sube la imagen a Firebase.
+          this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url').
           then((snapshot: any) => {
-            this.urlImagen = snapshot.getDownloadURL();
+            this.urlImagen = snapshot.downloadURL;
             alert("URL obtenida: "+this.urlImagen);
             console.log("URL obtenida: "+this.urlImagen);
-        });
-        alert("URL antes de subir a BBDD: "+this.urlImagen);
-        this._ANGFIRE.authState.subscribe(session => {
+          });
+          alert("URL antes de subir a BBDD: "+this.urlImagen);
+          ////////////////////////////
             let userID = session.uid;
             console.log("Usuario creado: "+userID);
             console.log("Url imagen antes subir ddbb: "+this.urlImagen);
