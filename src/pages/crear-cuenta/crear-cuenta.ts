@@ -121,7 +121,6 @@ export class CrearCuentaPage {
   /**
    * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
    */
-
   crearCuenta() {
     console.log("Metodo crearCuenta()");
     this.obtenerResultadosFormulario();
@@ -139,22 +138,17 @@ export class CrearCuentaPage {
             this.urlImagen = snapshot.getDownloadURL();
             alert("URL obtenida: "+this.urlImagen);
             console.log("URL obtenida: "+this.urlImagen);
-        });/*
-        var userID : string = this._ANGFIRE.authState.subscribe(session => {
-          if(session) {
-            //Usuario logueado
-            let uID = session.uid;
-            console.log("Usuario logueado: "+uID);
-            return this.uID;
-          } else {
-            console.log("Ningun usuario logueado");
-            return null;
-          }
-        }); */
-        this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, this.email, this.urlImagen);
-        this.form.reset();
-        alert("¡Tu cuenta ha sido creada!");
-        this.navCtrl.push(CarteleraPage);
+        });
+        alert("URL antes de subir a BBDD: "+this.urlImagen);
+        this._ANGFIRE.authState.subscribe(session => {
+            let userID = session.uid;
+            console.log("Usuario creado: "+userID);
+            console.log("Url imagen antes subir ddbb: "+this.urlImagen);
+            this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, this.urlImagen);
+            this.form.reset();
+            alert("¡Tu cuenta ha sido creada!");
+            this.navCtrl.push(CarteleraPage);
+        });
       });
 
   }

@@ -64,8 +64,8 @@ export class StorageProvider {
    * @param email
    * @param url
    */
-  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, email: string, url : string){
-    this.perfiles.doc(email).set({
+  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, uid: string, url : string){
+    this.perfiles.doc(uid).set({
       dob: dateOfBirth,
       nombre: nombre,
       url: url
