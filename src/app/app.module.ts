@@ -82,6 +82,8 @@ import { FileOpener } from "@ionic-native/file-opener";
     SplashScreen,
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    File,
+    FileOpener,
     Camera,
     ImagePicker,
     AutenticacionProvider,
@@ -90,8 +92,7 @@ import { FileOpener } from "@ionic-native/file-opener";
     Geolocation,
     YoutubeVideoPlayer,
     PayPal,
-    File,
-    FileOpener
+
   ]
 })
 export class AppModule {}
