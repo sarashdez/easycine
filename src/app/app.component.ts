@@ -15,6 +15,9 @@ import { EligeTuCinePage } from '../pages/elige-tu-cine/elige-tu-cine';
 import { LoginPage } from '../pages/login/login';
 import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
 import { HomePage } from '../pages/home/home';
+import {AutenticacionProvider} from "../providers/autenticacion/autenticacion";
+import {MiPerfilPage} from "../pages/mi-perfil/mi-perfil";
+import {AngularFireAuth} from "angularfire2/auth";
 
 
 @Component({
@@ -24,7 +27,9 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   rootPage:any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform,
+              statusBar: StatusBar,
+              splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -32,33 +37,32 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+
   goToCartelera(params){
     if (!params) params = {};
     this.navCtrl.setRoot(CarteleraPage);
-  }goToDetalle(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(DetallePage);
-  }goToComprarEntradas(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(ComprarEntradasPage);
-  }goToProximosEstrenos(params){
+  }
+
+  goToProximosEstrenos(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ProximosEstrenosPage);
-  }goToMisEntradas(params){
+  }
+
+  goToMisEntradas(params){
     if (!params) params = {};
     this.navCtrl.setRoot(MisEntradasPage);
-  }goToCriteriosBusqueda(params){
+  }
+
+  goToCriteriosBusqueda(params){
     if (!params) params = {};
     this.navCtrl.setRoot(CriteriosBusquedaPage);
-  }goToEligeTuCine(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(EligeTuCinePage);
-  }goToLogin(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(LoginPage);
-  }goToCrearCuenta(params){
-    if (!params) params = {};
-    this.navCtrl.setRoot(CrearCuentaPage);
   }
+
+  goToMiPerfil(){
+    this.navCtrl.push(MiPerfilPage);
+  }
+
+
+
 
 }

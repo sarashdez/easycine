@@ -4,6 +4,8 @@ import {Observable} from "rxjs/Rx";
 import {AngularFirestore} from "angularfire2/firestore";
 import {AutenticacionProvider} from "../../providers/autenticacion/autenticacion";
 import {CarteleraPage} from "../cartelera/cartelera";
+import {AngularFireAuth} from "angularfire2/auth";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-mi-perfil',
@@ -11,33 +13,44 @@ import {CarteleraPage} from "../cartelera/cartelera";
 })
 export class MiPerfilPage {
 
-  private uid : string;
-  perfil : any;
-  nombre : Observable<String>;
-  correo : Observable<String>;
-  dob : Observable<String>;
-  fotoURL : string;
+  private perfil : any;
+  private nombre : Observable<String>;
+  private correo : Observable<String>;
+  private dob : Observable<String>;
+  private fotoURL : string;
 
   constructor(public navCtrl: NavController,
-              public param: NavParams,
               private viewCtrl: ViewController,
               private dbStorage : AngularFirestore,
               private _AUTH  : AutenticacionProvider,
-              private alertCtrl: AlertController) {
-    this.uid = param.get("usuario");
+              private alertCtrl: AlertController,
+              private _ANGFIRE: AngularFireAuth) {
   }
 
   /**
    * Carga los componentes necesarios para la vista.
    */
   ionViewWillLoad() {
-    const perfilDoc = this.dbStorage.collection('usuarios').doc(this.uid);
-    perfilDoc.valueChanges().subscribe((profile: any) => {
-      this.perfil = profile;
-      this.nombre = this.perfil.nombre;
-      this.correo = this.perfil.correo;
-      this.dob = this.perfil.dob;
-      this.fotoURL = this.perfil.url;
+    //Primero se comprueba si el usuario ha iniciado sesion. Si es asi, se muestra su info. Si no se redirige a Login.
+    let uid : string;
+    console.log("Comprobar usuario logued");
+    this._ANGFIRE.authState.subscribe(session => {
+      if(session) {
+        //Usuario logueado
+        uid = session.uid;
+        console.log("Usuario logueado: "+uid);
+        const perfilDoc = this.dbStorage.collection('usuarios').doc(uid);
+        perfilDoc.valueChanges().subscribe((profile: any) => {
+          this.perfil = profile;
+          this.nombre = this.perfil.nombre;
+          this.correo = this.perfil.correo;
+          this.dob = this.perfil.dob;
+          this.fotoURL = this.perfil.url;
+        });
+      } else {
+        console.log("Ningun usuario logueado");
+        this.goToLogin();
+      }
     });
   }
 
@@ -80,6 +93,10 @@ export class MiPerfilPage {
   cerrarSesion() {
     this._AUTH.logOut();
     this.navCtrl.push(CarteleraPage);
+  }
+
+  goToLogin() {
+    this.navCtrl.push(LoginPage);
   }
 
 }
