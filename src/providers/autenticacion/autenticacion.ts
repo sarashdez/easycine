@@ -11,12 +11,11 @@ import * as firebase from 'firebase/app';
 export class AutenticacionProvider {
 
   public user : Observable<any>;
-
+  private uID : string;
 
   constructor(public http: Http,
               private _ANGFIRE: AngularFireAuth) {
     this.user = this._ANGFIRE.authState;
-
     console.log('Hello AutenticacionProvider');
   }
 
@@ -52,8 +51,21 @@ export class AutenticacionProvider {
     //TODO: MOSTRAR ALERTA SI EL EMAIL YA EXISTE
   }
 
+  loginStatus() {
+    console.log("loginStatus()");
+    this._ANGFIRE.authState.subscribe(session => {
+      if(session) {
+        //Usuario logueado
+        this.uID = session.uid;
+        console.log("Usuario logueado: "+this.uID);
+        return this.uID;
+      } else {
+        console.log("Ningun usuario logueado");
+        return null;
+      }
+    });
+  }
 
-  /*
   //Metodo LOGOUT().
   logOut() : Promise<any> {
     return new Promise ((resolve, reject) => {
@@ -65,7 +77,7 @@ export class AutenticacionProvider {
           reject(error);
         });
     });
-  }*/
+  }
 
 
 }
