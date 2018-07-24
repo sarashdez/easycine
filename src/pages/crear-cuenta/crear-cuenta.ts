@@ -8,6 +8,7 @@ import { MiPerfilPage } from "../mi-perfil/mi-perfil";
 import {finalize} from "rxjs/internal/operators";
 import {Observable} from "rxjs/Rx";
 import {AngularFireStorage} from "angularfire2/storage";
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -15,12 +16,21 @@ import {AngularFireStorage} from "angularfire2/storage";
 })
 export class CrearCuentaPage {
 
+  //Datos formulario
+  private email : string;
+  private password : string;
+  private nombre : string;
+  private fechaNacimiento : string;
+  private refImagen : string;
+  private urlImagen : string;
+
+
   //public urlImagen : string;
-  public refImagen : string = null;
-  public displayForm : boolean = true;
-  public displayError : string;
-  public form: FormGroup;
-  public fotoPerfilExiste : string = "Existe foto";
+
+  displayForm : boolean = true;
+  displayError : string;
+  form: FormGroup;
+  fotoPerfilExiste : string = "Existe foto";
   downloadURL: Observable<string>;
 
   constructor(public navCtrl: NavController,
@@ -29,7 +39,7 @@ export class CrearCuentaPage {
               private camera : Camera,
               public _AUTH  : AutenticacionProvider,
               private _STR : StorageProvider,
-              private cloudStorage : AngularFireStorage,) {
+              private cloudStorage : AngularFireStorage) {
     this.form = this._FB.group({
       'email' : [''],
       'password' : [''],
@@ -39,7 +49,6 @@ export class CrearCuentaPage {
   }
 
   /**
-   * Método mostrarOpcionesFotoPerfil().
    * Se muestra un menú con las opciones del usuario: subir foto desde la galería,
    * sacar una foto con la cámara o no añadir foto.
    */
@@ -61,13 +70,6 @@ export class CrearCuentaPage {
             console.log("Opción escogida: Galería");
             this.addFotoPerfil(2);
           }
-        },{
-          text: 'No quiero añadir foto de perfil',
-          handler: ()=> {
-            console.log("Opción escogida: Sin foto");
-            this.fotoPerfilExiste = null;
-            console.log("fotoPerfilExiste: "+ this.fotoPerfilExiste);
-          }
         }
       ]
     });
@@ -75,10 +77,9 @@ export class CrearCuentaPage {
   }
 
   /**
-   * Método addFotoPerfil(sourceType: number).
-   * @param {number} sourceType
    * El método permite al usuario obtener una foto de perfil en el registro,
-   * ya sea haciendo uso de la cámara o escogiendo la foto de la galería.
+   * ya sea haciendo uso de la cámara o escogiendo la foto de la galería..
+   * @param {number} sourceType
    */
   async addFotoPerfil(sourceType:number) {
     let sourceFoto;
@@ -115,66 +116,50 @@ export class CrearCuentaPage {
 
 
   /**
-   * Método crearCuenta.
    * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
-   *//*
+   */
+
   crearCuenta() {
     console.log("Metodo crearCuenta()");
+    this.obtenerResultadosFormulario();
+    console.log("Valores en crearCuenta()");
+    console.log("Email: " + this.email);
+    console.log("Contraseña: " + this.password);
+    console.log("Nombre: " + this.nombre);
+    console.log("Fecha de nacimiento: " + this.fechaNacimiento);
 
-    let email: string = this.form.controls['email'].value;
-    let password: string = this.form.controls['password'].value;
-    let nombre: string = this.form.controls['nombre'].value;
-    let fechaNacimiento : string = this.form.controls['fechaNacimiento'].value;
-/*
-    console.log("Valores obtenidos del formulario");
-    console.log("Email: " + email);
-    console.log("Contraseña: " + password);
-    console.log("Nombre: " + nombre);
-    console.log("Fecha de nacimiento: " + fechaNacimiento);
-    console.log("crearCuenta(). refImagen: "+this.refImagen);*/
-/*
-    this._AUTH.signUp(email, password)
+    this._AUTH.signUp(this.email, this.password)
       .then((auth: string) => {
-      ////////////////////////////
-        if(this.fotoPerfilExiste != null) {
-          var storageRef = this.cloudStorage.storage().ref();
-          //this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto, 'data_url');
-          var uploadTask = storageRef.child(`profilePhotos/${email}`).putString(this.refImagen, 'data_url');
+        //Se sube la imagen a Firebase.
+        this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url').
+          then((snapshot: any) => {
+            this.urlImagen = snapshot.getDownloadURL();
+            alert("URL obtenida: "+this.urlImagen);
+            console.log("URL obtenida: "+this.urlImagen);
 
-// Listen for state changes, errors, and completion of the upload.
-          uploadTask.on( // or 'state_changed'
-            function(snapshot) {
-              // Upload completed successfully, now we can get the download URL
-              uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                console.log('File available at', downloadURL);
-              });
-            });
-          /*const fileRef = this.cloudStorage.ref(`profilePhotos/${email}`);
-          var uploadTask = this._STR.uploadPhotoToCloud(this.refImagen, email);
-          uploadTask.snapshotChanges().pipe(
-            finalize(() => this.downloadURL = fileRef.getDownloadURL())
-          )
-            .subscribe();
-          console.log("Download urL: "+this.downloadURL.toString());
-        }
-        console.log("Download urL: "+this.downloadURL.toString());*/
-        /////////////////////////
-        /*this._STR.uploadProfileInfoToDB(fechaNacimiento, nombre, email, this.downloadURL.toString());
-        this.form.reset();
-        this.displayForm = false;
-        alert("¡Tu cuenta ha sido creada!");
-        this.navCtrl.push(MiPerfilPage, {
-          usuario: email
         });
-        console.log("crearCuenta Correcto");
-      })
-        .catch((error) => {
-          this.displayError = error.message;
-          alert("Ha habido un error y no se ha podido crear tu cuenta");
-          console.log("Error crearCuenta");
-          console.log(error.message);
       });
-  }*/
+  }
+
+  /**
+   * Recoge los datos introducidos por el usuario en el formulario.
+   */
+  obtenerResultadosFormulario() {
+    console.log("Obtener datos formulario");
+
+    this.email = this.form.controls['email'].value;
+    this.password = this.form.controls['password'].value;
+    this.nombre = this.form.controls['nombre'].value;
+    let fechaSinFormato : string  = this.form.controls['fechaNacimiento'].value;
+    //Formatear fecha
+    this.fechaNacimiento = moment(fechaSinFormato).format("DD/MM/YYYY");
+
+    console.log("Valores obtenidos del formulario");
+    console.log("Email: " + this.email);
+    console.log("Contraseña: " + this.password);
+    console.log("Nombre: " + this.nombre);
+    console.log("Fecha de nacimiento: " + this.fechaNacimiento);
+  }
 
 
 }
