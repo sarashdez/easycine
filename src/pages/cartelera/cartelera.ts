@@ -161,7 +161,7 @@ export class CarteleraPage {
 
 
 
-
+//PRUEBA SUBIDA GIT
 
 
 
