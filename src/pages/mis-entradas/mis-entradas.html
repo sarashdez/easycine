@@ -8,15 +8,23 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+
+
 <ion-content padding id="page9" style="background-color:#3A286B;">
-  <ion-list id="misEntradas-list6">
-    <ion-item color="none" id="misEntradas-list-item15">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Pelicula
-      </h2>
-    </ion-item>
+  <ion-list *ngFor="let entrada of entradas | async">
+      <ion-card>
+
+          <ion-item>
+              <ion-thumbnail item-start>
+                  <img src="{{entrada?.imagenURL}}"/>
+              </ion-thumbnail>
+              <h2>{{entrada.pelicula}}</h2>
+              <p>{{entrada.empresa}}, {{entrada.lugar}}</p>
+              <p>{{entrada.dia}} - {{entrada.hora}}h</p>
+              <p>Número de entradas: {{entrada.cantidad}}</p>
+          </ion-item>
+  
+        </ion-card>
+
   </ion-list>
 </ion-content>
