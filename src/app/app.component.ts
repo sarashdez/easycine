@@ -29,7 +29,8 @@ export class MyApp {
 
   constructor(platform: Platform,
               statusBar: StatusBar,
-              splashScreen: SplashScreen) {
+              splashScreen: SplashScreen,
+              private _ANGFIRE: AngularFireAuth) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -58,10 +59,30 @@ export class MyApp {
     this.navCtrl.setRoot(CriteriosBusquedaPage);
   }
 
+  comprobarUsuarioLoggedPerfil() {
+    //Primero se comprueba si el usuario ha iniciado sesion. Si es asi, se muestra su info. Si no se redirige a Login.
+    let uid : string;
+    console.log("Comprobar usuario logued");
+    this._ANGFIRE.authState.subscribe(session => {
+      if(session) {
+        //Usuario logueado
+        uid = session.uid;
+        console.log("Usuario logueado: "+uid);
+        this.goToMiPerfil();
+      } else {
+        console.log("Ningun usuario logueado");
+        this.goToLogin();
+      }
+    });
+  }
+
   goToMiPerfil(){
     this.navCtrl.push(MiPerfilPage);
   }
 
+  goToLogin(){
+    this.navCtrl.push(LoginPage);
+  }
 
 
 
