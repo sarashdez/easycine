@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CarteleraPage } from '../cartelera/cartelera';
 
@@ -13,6 +13,8 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 })
 export class EligeTuCinePage {
 
+  @ViewChild('map') mapElement: ElementRef;
+
   map : GoogleMap;
 
   constructor(public navCtrl: NavController,
@@ -23,8 +25,14 @@ export class EligeTuCinePage {
 
   }
 
+  ionViewWillEnter() {
+    this.iniciarMapa();
+  }
 
-
+  iniciarMapa() {
+    let element = this.mapElement.nativeElement;
+    this.map = this.googleMaps.create(element);
+  }
 
   //Criterios = null
 /*

@@ -38,12 +38,25 @@ export class CarteleraPage {
   pelicula : any;
   peliculaRecuperada : any;
 
+
+    //let arr2: boolean[] = new Array();
+
   //CARTELERA
   cartelera : ItemCartelera[] = [];
+  arrayPruebas : ItemCartelera[] = new Array();
+
+  arrayPruebas2 : Array<ItemCartelera> = new Array();
+
   carteleraObs : any;
   IDs : any;
   pruebas : Observable<ItemCartelera[]>;
   peliculas : Observable<Pelicula[]>;
+
+  //PRUEBAS
+  pruebasProyecciones : Array<Proyeccion> = new Array();
+  item : ItemCartelera;
+
+  
 
 
   constructor(public navCtrl: NavController,
@@ -66,14 +79,32 @@ export class CarteleraPage {
       console.log("Hora: "+this.hora);
       console.log("Cercania: "+this.cercania);
       //Se hace busqueda
-      this.busquedaCarteleraConCriterios(this.empresa, this.dia, this.hora, this.cercania);
+      //this.funcion();
+      //this.busquedaCarteleraConCriterios(this.empresa, this.dia, this.hora, this.cercania);
+      //this.funcion();
+      //this.comprobar();
+     // this.comprobar();
+      //this.comprobarResultados();
       //this.getCartelera();
+      //this.getItemCartelera();
+      this.ejecutarEnOrden();
     }
 
   }
 
   ionViewWillEnter() {
     this.viewCtrl.showBackButton(false);
+  }
+
+  async ejecutarEnOrden() {
+    await this.funcion1().then(data => console.log(data));
+    await this.funcion2().then(data => console.log(data));
+    await this.funcion3().then(data => console.log(data));
+    await this.busquedaCarteleraConCriterios(this.empresa, this.dia, this.hora, this.cercania).then(data =>
+    console.log("Observable array recuperado"+data));
+    await this.pasarObservableArray().then(data => console.log("pasarObservableArray: "+data));
+   // await this.comprobarResultado().then(data => console.log("comprobarresultadoterminado: "+data));
+    //await console.log("ARRAAAAAAY: "+this.pruebasProyecciones);
   }
 
   //BUSQUEDA CARTELERA CON CRITERIOS
@@ -156,24 +187,165 @@ export class CarteleraPage {
         return proyecciones;
       });*/
     }
+
+    console.log("Array en metodo busquedaCartelera: "+this.peliculasCercania);
+
+    return new Promise ((resolve, reject) => {
+      resolve(this.peliculasCercania);
+      reject("REJECT");
+    })
+
+
+
+    //Pasar de Observable a Array normal
+
+   
+/*
+    
+    console.log("Pasar observable proyecciones a array");
+    this.peliculasCercania.subscribe(proyecciones => {
+      this.pruebasProyecciones = proyecciones;
+      this.pruebasProyecciones.forEach(proyeccion => {
+        console.log("pelicula: "+proyeccion.peliculaID);
+      });
+      }
+    );*/
+
+    
+    /*
+    console.log("comprobar fuera del subscribe si se introducen los datos");
+    this.pruebasProyecciones.forEach(proyeccion => {
+      console.log("pelicula: "+proyeccion.peliculaID);
+    }); */
+
+  }
+
+  pasarObservableArray() {
+    console.log("pasarObservableArray");
+    let array : Array<Proyeccion> = new Array();
+
+
+    this.peliculasCercania.subscribe(proyecciones => {
+      console.log("dentro del map proyecciones");
+      console.log(proyecciones);
+      proyecciones.map(proyeccion => {
+        console.log("dentro del map proyeccion");
+        console.log("proyeccion: "+proyeccion.peliculaID);
+          array.push(proyeccion);
+      });
+      console.log("dentro del map proyecciones");
+      console.log("array auxiliar");
+      console.log(array);
+    });
+
+    console.log("fuera del map");
+    console.log("array:");
+    console.log(array);
+
+    return new Promise ((resolve, reject) => {
+      resolve(array);
+      /*resolve(this.peliculasCercania.subscribe(proyecciones => {
+        this.pruebasProyecciones = proyecciones;
+        console.log("dentro del subscribe");
+        console.log(this.pruebasProyecciones);
+        //return this.pruebasProyecciones;
+      }));*/
+      reject("REJECT");
+    })
+  }
+
+  comprobarResultado() {
+    return new Promise ((resolve, reject) => {
+      resolve(this.pruebasProyecciones);
+      reject("REJECT");
+    })
   }
 
 
 
+   
 
-//PRUEBA SUBIDA GIT
-
-
-
-
-
-
+  /*  this.CountryService.GetCountries()
+    .subscribe(countries => {
+        this.myGridOptions.rowData = countries as CountryData[]
+    })*/
 
 
-  /*getCartelera() {
+  
+
+  funcion1() {
+    return new Promise ((resolve, reject) => {
+      resolve("Función 1");
+      reject("REJECT");
+    })
+  }
+
+  funcion2() {
+    return new Promise ((resolve, reject) => {
+      resolve("Función 2");
+      reject("REJECT");
+    })
+  }
+
+  funcion3() {
+    return new Promise ((resolve, reject) => {
+      resolve("Función 3");
+      reject("REJECT");
+    })
+  }
+
+
+
+/*
+comprobarResultados() {
+  console.log("comprobar valores fuera del subscribe");
+    this.pruebasProyecciones.forEach(proyeccion => {
+      console.log("peliculaID: "+proyeccion.peliculaID);
+    });
+
+}*/
+
+
+
+/*
+getItemCartelera() {
+  console.log("getItemCartelera()");
+
+  this.pruebasProyecciones.forEach(proyeccion => {
+    console.log("Pruebas proyecciones - PeliculaID: "+proyeccion.peliculaID);
+    var docRef = this.dbStorage.collection('infoPeliculas').doc(proyeccion.peliculaID);
+    docRef.ref.get().then((doc) => {
+      this.pelicula = doc.data();
+      console.log("pelicula recuperada: "+this.pelicula.titulo);
+      this.item = {
+        titulo : this.pelicula.titulo,
+        empresa : proyeccion.empresa,
+        lugar : proyeccion.lugar,
+        dia : proyeccion.dia,
+        hora : proyeccion.hora,
+        edad : this.pelicula.edad,
+        duracion : this.pelicula.duracion,
+        imagen : this.pelicula.imagen
+      }
+
+      console.log("Item creado:");
+      console.log("dato pelicula - imagen: "+this.item.imagen);
+      console.log("dato proyeccion - lugar: "+this.item.lugar);
+      this.arrayPruebas2.push(this.item);
+      this.arrayPruebas2.forEach( elemento => {
+        console.log("Añadido al array: "+elemento.titulo);
+      });
+    })
+  });
+}*/
+
+
+
+/*
+  getCartelera() {
     console.log("getCartelera()");
 
-    this.pruebas = this.peliculasCercania.map(proyecciones =>
+    this.arrayPruebas = this.peliculasCercania.map(proyecciones =>
       proyecciones.map(proyeccion => {
         console.log(proyeccion.peliculaID);
         var docRef = this.dbStorage.collection('infoPeliculas').doc(proyeccion.peliculaID);
@@ -184,6 +356,7 @@ export class CarteleraPage {
             titulo : this.pelicula.titulo,
             empresa : proyeccion.empresa,
             lugar : proyeccion.lugar,
+            dia : proyeccion.dia,
             hora : proyeccion.hora,
             edad : this.pelicula.edad,
             duracion : this.pelicula.duracion,
@@ -192,21 +365,22 @@ export class CarteleraPage {
           console.log("Item creado:");
           console.log("dato pelicula - imagen: "+item.imagen);
           console.log("dato proyeccion - lugar: "+item.lugar);
-          this.cartelera.push(item);
-          this.cartelera.forEach(i => {
+          this.arrayPruebas.push(item);
+          this.arrayPruebas.forEach(i => {
             console.log("elemento array - imagen: "+i.imagen);
             }
           );
         })
-        return this.cartelera;
+        return this.arrayPruebas;
       })
     );
-  }*/
+  } */
 
+  /*
   goToDetalle(pelicula) {
     console.log("Metodo goToDetalle");
     this.navCtrl.push(DetallePage, {
-      peliculaSeleccionada: pelicula})
-  }
+      peliculaSeleccionada: pelicula});
+  }*/
 
 }
