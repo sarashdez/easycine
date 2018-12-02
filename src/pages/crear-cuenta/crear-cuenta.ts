@@ -4,14 +4,12 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
 import { StorageProvider } from "../../providers/storage/storage";
-import { MiPerfilPage } from "../mi-perfil/mi-perfil";
-import {finalize} from "rxjs/internal/operators";
 import {Observable} from "rxjs/Rx";
 import {AngularFireStorage} from "angularfire2/storage";
 import * as moment from 'moment';
-import {CarteleraPage} from "../cartelera/cartelera";
 import {AngularFireAuth} from "angularfire2/auth";
 import * as firebase from 'firebase';
+import {CriteriosBusquedaPage} from "../criterios-busqueda/criterios-busqueda";
 
 @Component({
   selector: 'page-crear-cuenta',
@@ -26,15 +24,7 @@ export class CrearCuentaPage {
   private fechaNacimiento : string;
   private refImagen : string;
   private urlImagen : Observable<any>;
-
-
-  //public urlImagen : string;
-
-  displayForm : boolean = true;
-  displayError : string;
   form: FormGroup;
-  fotoPerfilExiste : string = "Existe foto";
-  downloadURL: Observable<string>;
 
   constructor(public navCtrl: NavController,
               private _FB : FormBuilder,
@@ -135,7 +125,6 @@ export class CrearCuentaPage {
       .then((auth: string) => {
 
         this._ANGFIRE.authState.subscribe(session => {
-          ////////////////////////////
           //Se sube la imagen a Firebase.
           this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url');
 
@@ -149,7 +138,6 @@ export class CrearCuentaPage {
             console.log('after');
           },3000);
 
-          alert("URL antes de subir a BBDD: "+this.urlImagen);
           let userID = session.uid;
           console.log("Usuario creado: "+userID);
           console.log("Url imagen antes subir ddbb: "+this.urlImagen);
@@ -157,7 +145,7 @@ export class CrearCuentaPage {
           this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, this.urlImagen);
           this.form.reset();
           alert("¡Tu cuenta ha sido creada!");
-          this.navCtrl.push(CarteleraPage);
+          this.navCtrl.push(CriteriosBusquedaPage);
         });
       });
 
@@ -175,15 +163,6 @@ export class CrearCuentaPage {
     let fechaSinFormato : string  = this.form.controls['fechaNacimiento'].value;
     //Formatear fecha
     this.fechaNacimiento = moment(fechaSinFormato).format("DD/MM/YYYY");
-
-    console.log("Valores obtenidos del formulario");
-    console.log("Email: " + this.email);
-    console.log("Contraseña: " + this.password);
-    console.log("Nombre: " + this.nombre);
-    console.log("Fecha de nacimiento: " + this.fechaNacimiento);
   }
-
-
-
 
 }
