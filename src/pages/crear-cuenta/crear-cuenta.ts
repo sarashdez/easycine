@@ -4,11 +4,9 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
 import { StorageProvider } from "../../providers/storage/storage";
-import {Observable} from "rxjs/Rx";
 import {AngularFireStorage} from "angularfire2/storage";
 import * as moment from 'moment';
 import {AngularFireAuth} from "angularfire2/auth";
-import * as firebase from 'firebase';
 import {CriteriosBusquedaPage} from "../criterios-busqueda/criterios-busqueda";
 
 @Component({
@@ -23,7 +21,6 @@ export class CrearCuentaPage {
   private nombre : string;
   private fechaNacimiento : string;
   private refImagen : string;
-  private urlImagen : Observable<any>;
   form: FormGroup;
 
   constructor(public navCtrl: NavController,
@@ -113,36 +110,22 @@ export class CrearCuentaPage {
    * Coge los datos obtenidos en el formulario y registra al usuario en el servidor.
    */
   crearCuenta() {
-    console.log("Metodo crearCuenta()");
     this.obtenerResultadosFormulario();
-    console.log("Valores en crearCuenta()");
-    console.log("Email: " + this.email);
-    console.log("Contraseña: " + this.password);
-    console.log("Nombre: " + this.nombre);
-    console.log("Fecha de nacimiento: " + this.fechaNacimiento);
 
     this._AUTH.signUp(this.email, this.password)
       .then((auth: string) => {
 
         this._ANGFIRE.authState.subscribe(session => {
+          let userID = session.uid;
           //Se sube la imagen a Firebase.
-          this.cloudStorage.ref(`profilePhotos/${this.email}`).putString(this.refImagen, 'data_url');
+          this.cloudStorage.ref(`profilePhotos/${userID}`).putString(this.refImagen, 'data_url');
 
-          firebase.storage().ref().child(`profilePhotos/${this.email}`).getDownloadURL().then(url => {
-            console.log("URL recuperada de Firebase: "+url);
-            this.urlImagen = url;
-            alert("URL recuperada de Firebase: "+url);
-          });
           //Espera de 3 seg.
           setTimeout(function(){
             console.log('after');
           },3000);
 
-          let userID = session.uid;
-          console.log("Usuario creado: "+userID);
-          console.log("Url imagen antes subir ddbb: "+this.urlImagen);
-
-          this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, this.urlImagen);
+          this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, this.email);
           this.form.reset();
           alert("¡Tu cuenta ha sido creada!");
           this.navCtrl.push(CriteriosBusquedaPage);

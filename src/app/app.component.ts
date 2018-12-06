@@ -2,22 +2,15 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { CarteleraPage } from '../pages/cartelera/cartelera';
-import { DetallePage } from '../pages/detalle/detalle';
-
-import { ComprarEntradasPage } from '../pages/comprar-entradas/comprar-entradas';
-
 import { ProximosEstrenosPage } from '../pages/proximos-estrenos/proximos-estrenos';
 import { MisEntradasPage } from '../pages/mis-entradas/mis-entradas';
 import { CriteriosBusquedaPage } from '../pages/criterios-busqueda/criterios-busqueda';
-import { EligeTuCinePage } from '../pages/elige-tu-cine/elige-tu-cine';
 import { LoginPage } from '../pages/login/login';
-import { CrearCuentaPage } from '../pages/crear-cuenta/crear-cuenta';
 import { HomePage } from '../pages/home/home';
-import {AutenticacionProvider} from "../providers/autenticacion/autenticacion";
 import {MiPerfilPage} from "../pages/mi-perfil/mi-perfil";
 import {AngularFireAuth} from "angularfire2/auth";
+import * as firebase from "firebase";
 
 
 @Component({
@@ -26,6 +19,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   rootPage:any = HomePage;
+  private fotoURL : string;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
@@ -36,6 +30,18 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+    });
+
+    this._ANGFIRE.authState.subscribe(session => {
+      if(session) {
+        //Usuario logueado
+        firebase.storage().ref().child(`profilePhotos/${session.uid}`).getDownloadURL().then(url => {
+          console.log("URL recuperada de Firebase: " + url);
+          this.fotoURL = url;
+        });
+      } else {
+        this.fotoURL = "https://firebasestorage.googleapis.com/v0/b/easy-cine.appspot.com/o/profilePhotos%2FprofileIcon.png?alt=media&token=f8505d1d-ebc1-406f-abc5-c83dfaf387bb";
+      }
     });
   }
 

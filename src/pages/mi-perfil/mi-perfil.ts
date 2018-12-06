@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, NavController, ViewController} from 'ionic-angular';
 import {Observable} from "rxjs/Rx";
 import {AngularFirestore} from "angularfire2/firestore";
 import {AutenticacionProvider} from "../../providers/autenticacion/autenticacion";
-import {CarteleraPage} from "../cartelera/cartelera";
 import {AngularFireAuth} from "angularfire2/auth";
-import {LoginPage} from "../login/login";
+import {HomePage} from "../home/home";
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-mi-perfil',
@@ -31,26 +31,27 @@ export class MiPerfilPage {
    * Carga los componentes necesarios para la vista.
    */
   ionViewWillLoad() {
-    //Primero se comprueba si el usuario ha iniciado sesion. Si es asi, se muestra su info. Si no se redirige a Login.
     let uid : string;
-    console.log("Comprobar usuario logued");
     this._ANGFIRE.authState.subscribe(session => {
-      if(session) {
         //Usuario logueado
         uid = session.uid;
-        console.log("Usuario logueado: "+uid);
+
+        firebase.storage().ref().child(`profilePhotos/${uid}`).getDownloadURL().then(url => {
+          console.log("URL recuperada de Firebase: " + url);
+          this.fotoURL = url;
+        });
+
+        setTimeout(function(){
+          console.log('after');
+        },3000);
+
         const perfilDoc = this.dbStorage.collection('usuarios').doc(uid);
         perfilDoc.valueChanges().subscribe((profile: any) => {
           this.perfil = profile;
           this.nombre = this.perfil.nombre;
-          this.correo = this.perfil.correo;
+          this.correo = this.perfil.email;
           this.dob = this.perfil.dob;
-          this.fotoURL = this.perfil.url;
         });
-      } else {
-        console.log("Ningun usuario logueado");
-        this.goToLogin();
-      }
     });
   }
 
@@ -88,15 +89,11 @@ export class MiPerfilPage {
   }
 
   /**
-   * Cierra la sesion del usuario en la app y lo redirige a la pagina de Cartelera.
+   * Cierra la sesion del usuario en la app y lo redirige a la pagina de inicio.
    */
   cerrarSesion() {
     this._AUTH.logOut();
-    this.navCtrl.push(CarteleraPage);
-  }
-
-  goToLogin() {
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push(HomePage);
   }
 
 }

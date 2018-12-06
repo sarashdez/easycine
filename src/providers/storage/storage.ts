@@ -64,11 +64,11 @@ export class StorageProvider {
    * @param email
    * @param url
    */
-  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, uid: string, url : any){
+  uploadProfileInfoToDB(dateOfBirth : string, nombre : string, uid: string, email: string){
     this.perfiles.doc(uid).set({
       dob: dateOfBirth,
       nombre: nombre,
-      url: url
+      email: email
     }).then(function(docRef) {
       console.log("Documento añadido.");
     }).catch(function(error) {

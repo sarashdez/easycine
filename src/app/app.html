@@ -10,7 +10,7 @@
     <ion-list id="menu-list1">
       <ion-item color="none" menuClose="" on-click="comprobarUsuarioLoggedPerfil()" id="menu-list-item4">
         <ion-thumbnail item-left>
-          <img />
+          <img [src]="fotoURL" *ngIf="fotoURL"/>
         </ion-thumbnail>
         <h2>
           Mi perfil
