@@ -377,10 +377,12 @@ getItemCartelera() {
   } */
 
   /*
+
+   */
   goToDetalle(pelicula) {
     console.log("Metodo goToDetalle");
     this.navCtrl.push(DetallePage, {
       peliculaSeleccionada: pelicula});
-  }*/
+  }
 
 }
