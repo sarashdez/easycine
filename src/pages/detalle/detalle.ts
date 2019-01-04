@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
-
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
 import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
-import {CarteleraPage} from "../cartelera/cartelera";
 
 @Component({
   selector: 'page-detalle',
@@ -12,21 +10,24 @@ import {CarteleraPage} from "../cartelera/cartelera";
 export class DetallePage {
 
   item : any;
-  videoID : string;
 
   constructor(public navCtrl: NavController,
               public param: NavParams,
               private viewCtrl: ViewController,
               private youtube: YoutubeVideoPlayer) {
     this.item = param.get("peliculaSeleccionada");
-    console.log("constructorDetalle item recuperado: "+this.item.peliculaID);
   }
 
+  /**
+   * Se reproduce en Youtube el trailer de la pelicula seleccionada.
+   */
   reproducirVideo() {
     this.youtube.openVideo(this.item.trailer)
   }
 
-
+  /**
+   * Navegacion a la pantalla ComprarEntradas.
+   */
   goToComprarEntradas(){
     this.navCtrl.push(ComprarEntradasPage, {
       pelicula : this.item
