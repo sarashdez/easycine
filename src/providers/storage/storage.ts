@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireStorage, AngularFireUploadTask} from "angularfire2/storage";
-import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryFn} from "angularfire2/firestore";
+import {AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { Pelicula } from '../../models/pelicula';
@@ -13,25 +12,19 @@ export class StorageProvider {
 
   peliculasRef : AngularFirestoreCollection<Pelicula>;
   peliculas$ : Observable<Pelicula[]>;
-
-  public perfiles : AngularFirestoreCollection<any>;
-  // public perfil : AngularFirestoreDocument<Perfil>;
-  //public perfil : Perfil;
-  private queryPerfil : QueryFn = null;
-  private entradas : AngularFirestoreCollection<any>;
+  perfiles : AngularFirestoreCollection<any>;
+  entradas : AngularFirestoreCollection<any>;
 
 
   constructor(private cloudStorage : AngularFireStorage,
               private dbStorage : AngularFirestore) {
     this.peliculasRef = this.dbStorage.collection('infoPeliculas');
     this.peliculas$ = this.peliculasRef.valueChanges();
-    //////////
+
     this.perfiles = this.dbStorage.collection('/usuarios');
     this.entradas = this.dbStorage.collection('/entradas');
   }
 
-
-  //CLOUD STORAGE
 
   /**
    * Sube la imagen del usuario a Cloud Storage y la almacena utilizando el email de registro
@@ -42,20 +35,6 @@ export class StorageProvider {
   uploadPhotoToCloud(refFoto : string, emailUsuario : string): AngularFireUploadTask {
     return this.cloudStorage.ref(`profilePhotos/${emailUsuario}`).putString(refFoto, 'data_url');
   }
-
-  /**
-   * Recupera la imagen del usuario (url de descarga).
-   */
-  downloadPhotoFromCloud() {
-    //TODO: Obtener enlace de descarga de la imagen
-  }
-
-  //TODO: deletePhotoFromCloud
-
-
-
-
-  //FIRESTORE
 
   /**
    * Añade los datos de registro del usuario a la base de datos.
@@ -87,10 +66,6 @@ export class StorageProvider {
 
     docRef.ref.get().then(function (doc) {
       if (doc.exists) {
-        console.log("Document data:", doc.data());
-        console.log("Nombre: " + doc.data().nombre);
-        console.log("Email: " + doc.data().email);
-        console.log("DOB: " + doc.data().dob);
         return doc;
       } else {
         // doc.data() will be undefined in this case
@@ -101,37 +76,26 @@ export class StorageProvider {
     });
   }
 
-    //TODO: RECUPERAR INFO DEL DOCUMENTO
-
-
-    /**
-     * Añade la entrada comprada a la base de datos.
-     * @param dateOfBirth
-     * @param nombre
-     * @param email
-     * @param url
-     */
-    uploadEntradaToDB(email: string, cantidad: string, dia: string, empresa: string, hora: string, lugar: string, pelicula: string){
-      this.entradas.doc(email).set({
-        cantidad: cantidad,
-        dia: dia,
-        empresa: empresa,
-        hora: hora,
-        lugar: lugar,
-        pelicula: pelicula
-      }).then(function(docRef) {
-        console.log("Documento añadido.");
-      }).catch(function(error) {
-        console.error("Error al añadir documento.");
-      });
-    }
-
-
-
-
-
-
-
-
+  /**
+   * Añade la entrada comprada a la base de datos.
+   * @param dateOfBirth
+   * @param nombre
+   * @param email
+   * @param url
+   */
+  uploadEntradaToDB(email: string, cantidad: string, dia: string, empresa: string, hora: string, lugar: string, pelicula: string){
+    this.entradas.doc(email).set({
+      cantidad: cantidad,
+      dia: dia,
+      empresa: empresa,
+      hora: hora,
+      lugar: lugar,
+      pelicula: pelicula
+    }).then(function(docRef) {
+      console.log("Documento añadido.");
+    }).catch(function(error) {
+      console.error("Error al añadir documento.");
+    });
+  }
 
 }
