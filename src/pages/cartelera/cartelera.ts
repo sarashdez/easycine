@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { ViewController } from "ionic-angular";
-import { Geolocation } from '@ionic-native/geolocation';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
-import {Pelicula} from "../../models/pelicula";
-import {BehaviorSubject, Observable} from "rxjs";
-import {delay, switchMap} from 'rxjs/operators';
-import {Proyeccion} from "../../models/proyeccion";
-import {ItemCartelera} from "../../models/itemCartelera";
-import {DetallePage} from "../detalle/detalle";
-import {query} from "@angular/animations";
-import {AngularFireAuth} from "angularfire2/auth";
+import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { Observable } from "rxjs";
+import { Proyeccion } from "../../models/proyeccion";
+import { ItemCartelera } from "../../models/itemCartelera";
+import { DetallePage } from "../detalle/detalle";
 
 
 @Component({
@@ -52,6 +47,13 @@ export class CarteleraPage {
     this.viewCtrl.showBackButton(false);
   }
 
+  /**
+   * Busca en Firebase todas las proyecciones que se ajustan a los parametros introducidos
+   * por el usuario.
+   * @param empresa
+   * @param dia
+   * @param hora
+   */
   busquedaCarteleraConCriterios(empresa : string, dia : string, hora : string) {
 
     //Dia y hora seleccionados
@@ -102,6 +104,10 @@ export class CarteleraPage {
     this.proyeccionesFinal = this.proyeccionesEmpresa;
   }
 
+  /**
+   * Recupera de Firebase la informacion de las peliculas que se ajustan a los criterios introducidos
+   * y la almacena en un array de objetos tipo ItemCartelera.
+   */
   getItems() {
     this.itemsObservable = this.proyeccionesFinal.map(proyecciones => {
       proyecciones.map(proyeccion => {
@@ -139,9 +145,9 @@ export class CarteleraPage {
     });
   }
 
-
-  /*
-
+  /**
+   * Navegacion a la pantalla Detalle.
+   * @param pelicula seleccionada por el usuario
    */
   goToDetalle(pelicula) {
     console.log("Metodo goToDetalle");
