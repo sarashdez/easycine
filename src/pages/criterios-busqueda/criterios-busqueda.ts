@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
 import { CarteleraPage } from '../cartelera/cartelera';
-
 import { FormBuilder, FormGroup } from "@angular/forms";
 import * as moment from 'moment';
 
@@ -13,8 +11,8 @@ import * as moment from 'moment';
 })
 export class CriteriosBusquedaPage {
 
-  public form: FormGroup;
-  public date : any;
+  form: FormGroup;
+  date : any;
 
   //Datos formulario
   empresa : string;
@@ -33,12 +31,11 @@ export class CriteriosBusquedaPage {
     })
   };
 
+  /**
+   * Navegacion a la pantalla Cartelera.
+   */
   goToCartelera(){
     this.obtenerResultadosFormulario();
-    console.log("Valores parametros goToCartelera()");
-    console.log("Empresa: " + this.empresa);
-    console.log("Dia: " + this.dia);
-    console.log("Hora: " + this.hora);
     this.navCtrl.push(CarteleraPage, {
       empresa : this.empresa,
       dia : this.dia,
@@ -46,6 +43,9 @@ export class CriteriosBusquedaPage {
     });
   }
 
+  /**
+   * Se obtienen los valores seleccionados por el usuario en el formulario.
+   */
   obtenerResultadosFormulario() {
     this.empresa = this.form.controls['empresa'].value;
     let diaSinFormato : string = this.form.controls['dia'].value;
@@ -53,13 +53,6 @@ export class CriteriosBusquedaPage {
     this.diaChecked = this.form.controls['diaChecked'].value;
     //Formatear fecha
     this.dia = moment(diaSinFormato).format("DD/MM/YYYY");
-
-    console.log("Valores obtenidos del formulario");
-    console.log("Empresa: " + this.empresa);
-    console.log("Dia: " + diaSinFormato);
-    console.log("Dia formateado: " + this.dia);
-    console.log("Hora: " + this.hora);
-    console.log("Resultado checkbox: "+this.diaChecked);
 
     //Gestion de resultados
     if(this.empresa==="Indiferente") {
