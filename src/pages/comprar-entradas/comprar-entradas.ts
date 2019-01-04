@@ -34,11 +34,8 @@ export class ComprarEntradasPage {
    * Calcula el precio total de la compra del usuario.
    */
   calcularPrecioTotal() {
-    console.log("calcularPrecioTotal()");
     this.numEntradas = this.form.controls['numEntradas'].value;
-    console.log("Numero entradas: " + this.numEntradas);
     var entradas: number = parseInt(this.numEntradas);
-    console.log("Numero entradas number: " + entradas);
     this.precioTotal = this.precio * entradas;
   }
 
