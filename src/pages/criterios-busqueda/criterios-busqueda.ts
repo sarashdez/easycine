@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { CarteleraPage } from '../cartelera/cartelera';
-import {EligeTuCinePage} from "../elige-tu-cine/elige-tu-cine";
 
 import { FormBuilder, FormGroup } from "@angular/forms";
 import * as moment from 'moment';
@@ -21,7 +20,6 @@ export class CriteriosBusquedaPage {
   empresa : string;
   dia : string;
   hora : string;
-  cercania : string;
   diaChecked : boolean;
 
   constructor(public navCtrl: NavController,
@@ -31,7 +29,6 @@ export class CriteriosBusquedaPage {
       'empresa' : [''],
       'dia' : [''],
       'hora' : [''],
-      'cercania' : [''],
       'diaChecked' : false
     })
   };
@@ -42,13 +39,10 @@ export class CriteriosBusquedaPage {
     console.log("Empresa: " + this.empresa);
     console.log("Dia: " + this.dia);
     console.log("Hora: " + this.hora);
-    console.log("Cercania: " + this.cercania);
     this.navCtrl.push(CarteleraPage, {
-      criterios : "criterios",
       empresa : this.empresa,
       dia : this.dia,
-      hora : this.hora,
-      cercania : this.cercania
+      hora : this.hora
     });
   }
 
@@ -56,7 +50,6 @@ export class CriteriosBusquedaPage {
     this.empresa = this.form.controls['empresa'].value;
     let diaSinFormato : string = this.form.controls['dia'].value;
     this.hora = this.form.controls['hora'].value;
-    this.cercania = this.form.controls['cercania'].value;
     this.diaChecked = this.form.controls['diaChecked'].value;
     //Formatear fecha
     this.dia = moment(diaSinFormato).format("DD/MM/YYYY");
@@ -66,7 +59,6 @@ export class CriteriosBusquedaPage {
     console.log("Dia: " + diaSinFormato);
     console.log("Dia formateado: " + this.dia);
     console.log("Hora: " + this.hora);
-    console.log("Cercania: " + this.cercania);
     console.log("Resultado checkbox: "+this.diaChecked);
 
     //Gestion de resultados
@@ -79,17 +71,6 @@ export class CriteriosBusquedaPage {
     if(this.hora==="Indiferente") {
       this.hora = null;
     }
-    if(this.cercania==="No") {
-      this.cercania = null;
-    }
   }
-
-  goToEligeTuCine() {
-    this.navCtrl.push(EligeTuCinePage);
-  }
-
-
-
-
 
 }

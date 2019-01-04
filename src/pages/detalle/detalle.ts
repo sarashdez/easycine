@@ -11,8 +11,8 @@ import {CarteleraPage} from "../cartelera/cartelera";
 })
 export class DetallePage {
 
-  private item : any;
-  videoID : string = '1sUbOSVTdgg';
+  item : any;
+  videoID : string;
 
   constructor(public navCtrl: NavController,
               public param: NavParams,
@@ -23,7 +23,7 @@ export class DetallePage {
   }
 
   reproducirVideo() {
-    this.youtube.openVideo(this.videoID)
+    this.youtube.openVideo(this.item.trailer)
   }
 
 

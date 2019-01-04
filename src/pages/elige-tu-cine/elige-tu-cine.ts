@@ -13,7 +13,7 @@ export class EligeTuCinePage {
 
 
 
-  //Criterios = null
+                       //Criterios = null
 /*
   goToCartelera(params){
     if (!params) params = {};
