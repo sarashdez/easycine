@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams, ViewController } from 'ionic-angular';
-
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PayPal, PayPalConfiguration, PayPalPayment } from "@ionic-native/paypal";
-import {StorageProvider} from "../../providers/storage/storage";
+import { StorageProvider } from "../../providers/storage/storage";
 
 @Component({
   selector: 'page-comprar-entradas',
@@ -26,12 +25,14 @@ export class ComprarEntradasPage {
               private paypal: PayPal,
               private _STR: StorageProvider) {
     this.item = param.get("pelicula");
-    console.log("constructorDetalle item recuperado: " + this.item.peliculaID);
     this.form = this._FB.group({
       'numEntradas': ['']
     })
   }
 
+  /**
+   * Calcula el precio total de la compra del usuario.
+   */
   calcularPrecioTotal() {
     console.log("calcularPrecioTotal()");
     this.numEntradas = this.form.controls['numEntradas'].value;
@@ -41,6 +42,10 @@ export class ComprarEntradasPage {
     this.precioTotal = this.precio * entradas;
   }
 
+  /**
+   * Alerta que informa al usuario del total de la compra y le pide que confirme que quiere continuar
+   * con el proceso de compra.
+   */
   confirmarContinuar() {
     this.calcularPrecioTotal();
     console.log("Metodo confirmarContinuar()");
@@ -66,6 +71,10 @@ export class ComprarEntradasPage {
     confirm.present();
   }
 
+  /**
+   * Se realiza el proceso de pago con Paypal y, una vez completado con exito, se almacena
+   * la informacion de las entradas compradas en Firebase.
+   */
   pagoPaypal() {
     this.paypal.init({
       //Production client ID
@@ -84,29 +93,30 @@ export class ComprarEntradasPage {
           this.alertaProcesoDePago(titulo, mensaje);
         }, () => {
           //Error en el pago
-          console.log("Error en el pago");
           let titulo: string = 'Pago fallido';
           let mensaje: string = 'El pago no ha podido completarse. Por favor, inténtelo de nuevo.';
           this.alertaProcesoDePago(titulo, mensaje);
         });
       }, () => {
         //Error en la configuracion
-        console.log("Error en la configuracion");
         let titulo: string = 'Proceso erróneo';
         let mensaje: string = 'Ha habido un error interno, lo arreglaremos en la mayor brevedad posible. Disculpe por las molestias.';
         this.alertaProcesoDePago(titulo, mensaje);
       });
     }, () => {
       //Error en la inicializacion
-      console.log("Error en la inicializacion");
       let titulo: string = 'Proceso erróneo';
       let mensaje: string = 'No se ha podido inicializar el servicio de pago con Paypal. Por favor, inténtelo más tarde.';
       this.alertaProcesoDePago(titulo, mensaje);
     });
   }
 
+  /**
+   * Alerta que informa al usuario del estado del proceso de pago.
+   * @param titulo
+   * @param mensaje
+   */
   alertaProcesoDePago(titulo: string, mensaje: string) {
-    console.log("Metodo alertaProcesoDePago()");
     let confirm = this.alertCtrl.create({
       title: titulo,
       message: mensaje,
