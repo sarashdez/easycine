@@ -1,21 +1,18 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
-    <!--<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>-->
     <ion-title>
       Criterios
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page4" style="background-color:#3A286B;">
-  <button id="criteriosBusqueda-button3" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToEligeTuCine()">
-    Prefiero elegir mi cine
-  </button>
-  <div class="spacer" style="width:300px;height:14px;" id="criteriosBusqueda-spacer5"></div>
-  <form id="criteriosBusqueda-form1" [formGroup]="form">
-    <!--<div class="spacer" style="width:300px;height:14px;" id="criteriosBusqueda-spacer5"></div>-->
-    <ion-item id="criteriosBusqueda-select1">
+
+<ion-content padding style="background-color:#3A286B;">
+
+  <h1 style="color:#FFFFFF;">Selecciona los criterios que quieres que se tengan en cuenta para
+  realizar la búsqueda:</h1>
+  <br>
+  <form [formGroup]="form">
+    <ion-item>
       <ion-label>
         Empresa
       </ion-label>
@@ -25,15 +22,10 @@
         <ion-option>Indiferente</ion-option>
       </ion-select>
     </ion-item>
-    <!--<div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer2"></div>
 
-    <div id="criteriosBusqueda-markdown8" class="show-list-numbers-and-dots">-->
-    <p style="color:#FFFFFF;">
-      ¿Qué día quieres ir al cine?
-    </p>
-    <!--</div>-->
+    <p style="color:#FFFFFF;">¿Qué día quieres ir al cine?</p>
 
-    <ion-item id="criteriosBusqueda_dia">
+    <ion-item>
       <ion-datetime formControlName="dia" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" placeholder="01/01/2000"></ion-datetime>
     </ion-item>
 
@@ -42,10 +34,9 @@
       <ion-checkbox formControlName="diaChecked"></ion-checkbox>
     </ion-item>
 
-    <p style="color:#FFFFFF;">
-      ¿A partir de qué hora quieres ir?
-    </p>
-    <ion-item id="criteriosBusqueda-select2">
+    <p style="color:#FFFFFF;">¿A partir de qué hora quieres ir?</p>
+
+    <ion-item>
       <ion-label>
         Hora
       </ion-label>
@@ -57,19 +48,15 @@
         <ion-option>20:00</ion-option>
         <ion-option>21:00</ion-option>
         <ion-option>22:00</ion-option>
+        <ion-option>23:00</ion-option>
         <ion-option>Indiferente</ion-option>
       </ion-select>
     </ion-item>
-    <!-- <div class="spacer" style="width:300px;height:12px;" id="criteriosBusqueda-spacer3"></div>
-     <div id="criteriosBusqueda-markdown3" class="show-list-numbers-and-dots"> -->
-    <p style="color:#FFFFFF;">
-      Cercanía (se tendrá en cuenta tu ubicación actual)
-    </p>
-    <!-- </div> -->
-    <!--<div class="spacer" style="width:300px;height:30px;" id="criteriosBusqueda-spacer4"></div>-->
   </form>
-  <div class="spacer" style="width:300px;height:30px;" id="criteriosBusqueda-spacer4"></div>
-  <button id="criteriosBusqueda-button4" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToCartelera()">
+
+  <div class="spacer" style="width:300px;height:30px;"></div>
+
+  <button ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToCartelera()">
     Siguiente
   </button>
 
