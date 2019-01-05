@@ -40,7 +40,7 @@ export class CarteleraPage {
     this.dia = param.get("dia");
     this.hora = param.get("hora");
     this.busquedaCarteleraConCriterios(this.empresa, this.dia, this.hora);
-    this.getItems();
+    this.recuperarPeliculas();
   }
 
   ionViewWillEnter() {
@@ -108,7 +108,7 @@ export class CarteleraPage {
    * Recupera de Firebase la informacion de las peliculas que se ajustan a los criterios introducidos
    * y la almacena en un array de objetos tipo ItemCartelera.
    */
-  getItems() {
+  recuperarPeliculas() {
     this.itemsObservable = this.proyeccionesFinal.map(proyecciones => {
       proyecciones.map(proyeccion => {
         var docRef = this.dbStorage.collection('infoPeliculas').doc(proyeccion.peliculaID);
