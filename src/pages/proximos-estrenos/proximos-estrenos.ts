@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {AngularFirestore, AngularFirestoreCollection} from "angularfire2/firestore";
+import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Pelicula } from "../../models/pelicula";
-import {Observable} from "rxjs";
-import {Proyeccion} from "../../models/proyeccion";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'page-proximos-estrenos',
