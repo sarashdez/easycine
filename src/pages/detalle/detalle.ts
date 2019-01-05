@@ -40,7 +40,7 @@ export class DetallePage {
       if(session) {
         //Usuario logueado
         uid = session.uid;
-        this.goToComprarEntradas();
+        this.goToComprarEntradas(uid);
       } else {
         //alert('Esta opción solo está disponible para usuarios registrados.');
         this.alertaSesionNoIniciada();
@@ -85,9 +85,9 @@ export class DetallePage {
   /**
    * Navegacion a la pantalla ComprarEntradas.
    */
-  goToComprarEntradas(){
+  goToComprarEntradas(sesion : string){
     this.navCtrl.push(ComprarEntradasPage, {
-      pelicula : this.item
+      pelicula : this.item, sesion : sesion
     });
   }
 
