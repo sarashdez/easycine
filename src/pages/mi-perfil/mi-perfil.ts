@@ -37,7 +37,6 @@ export class MiPerfilPage {
         uid = session.uid;
 
         firebase.storage().ref().child(`profilePhotos/${uid}`).getDownloadURL().then(url => {
-          console.log("URL recuperada de Firebase: " + url);
           this.fotoURL = url;
         });
 

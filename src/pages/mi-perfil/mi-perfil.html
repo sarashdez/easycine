@@ -13,14 +13,16 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding id="page11" style="background-color:#3A286B;">
   <img [src]="fotoURL" *ngIf="fotoURL" style="display:block;width:45%;height:auto;margin-left:auto;margin-right:auto;border: white 5px solid"/>
   <h3 id="miPerfil-heading19" style="color:#FFFFFF;text-align:center;">
     {{ nombre }}
   </h3>
   <h5 style="color:#FFFFFF;text-align:justify;">
-    <b>Correo electrónico utilizado para el registro:</b> {{ correo }}
+    <b>Correo electrónico utilizado para el registro:</b>
   </h5>
+  <p style="color:#FFFFFF;">{{ correo }}</p>
   <h5 style="color:#FFFFFF;font-weight:300;text-align:justify;">
     <b>Fecha de nacimiento:</b> {{ dob }}
   </h5>
