@@ -8,15 +8,24 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page8" style="background-color:#3A286B;">
-  <ion-list id="proximosEstrenos-list5">
-    <ion-item color="none" id="proximosEstrenos-list-item14">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Pelicula
-      </h2>
-    </ion-item>
+
+<ion-content style="background-color:#3A286B;">
+
+  <ion-list *ngFor="let item of peliculas | async">
+    <ion-card>
+
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="{{item?.imagen}}"/>
+        </ion-thumbnail>
+        <h2>{{item.titulo}}</h2>
+        <p>{{item.genero}}</p>
+        <p>{{item.duracion}}</p>
+        <p>Edad: {{item.edad}}</p>
+      </ion-item>
+
+    </ion-card>
+
   </ion-list>
+
 </ion-content>

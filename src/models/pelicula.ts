@@ -4,7 +4,7 @@ export interface Pelicula {
   edad : string;
   estreno : string;
   genero : string;
-  imagen : string; //????
+  imagen : string;
   peliculaID : string;
   productor : string;
   reparto : string;
