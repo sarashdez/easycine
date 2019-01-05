@@ -111,7 +111,6 @@ export class CarteleraPage {
   getItems() {
     this.itemsObservable = this.proyeccionesFinal.map(proyecciones => {
       proyecciones.map(proyeccion => {
-        console.log("Pruebas proyecciones - PeliculaID: " + proyeccion.peliculaID);
         var docRef = this.dbStorage.collection('infoPeliculas').doc(proyeccion.peliculaID);
         docRef.ref.get().then(doc => {
           this.item = {
@@ -135,9 +134,6 @@ export class CarteleraPage {
           }
 
           this.items.push(this.item);
-          this.items.forEach(elemento => {
-            console.log("Añadido al array: " + elemento.titulo)
-          });
 
         });
       })
@@ -150,7 +146,6 @@ export class CarteleraPage {
    * @param pelicula seleccionada por el usuario
    */
   goToDetalle(pelicula) {
-    console.log("Metodo goToDetalle");
     this.navCtrl.push(DetallePage, {
       peliculaSeleccionada: pelicula});
   }
