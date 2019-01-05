@@ -1,76 +1,28 @@
 <ion-header>
   <ion-navbar>
-
-    <!--<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-buttons left>
-      <button ion-button icon-only (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>-->
-
     <ion-title>
       {{ item.titulo }}
     </ion-title>
-
   </ion-navbar>
 </ion-header>
 
-<ion-content padding id="page7" style="background-color:#3A286B;">
-  <h4 id="detalle-heading45" style="color:#FFFFFF;">
-    INFORMACIÓN DE LA PROYECCIÓN:
-  </h4>
-  <h4 id="detalle-heading4" style="color:#FFFFFF;">
-    Ubicación
-  </h4>
-  <h4 id="detalle-heading5" style="color:#FFFFFF;font-weight:300;">
-    {{ item.empresa }} - {{ item.lugar }}
-  </h4>
-  <h4 id="detalle-heading61" style="color:#FFFFFF;">
-    Día
-  </h4>
-  <h4 id="detalle-heading71" style="color:#FFFFFF;font-weight:300;">
-    {{ item.dia }}
-  </h4>
-  <h4 id="detalle-heading6" style="color:#FFFFFF;">
-    Hora
-  </h4>
-  <h4 id="detalle-heading7" style="color:#FFFFFF;font-weight:300;">
-    {{ item.hora }}
-  </h4>
-  <h4 id="detalle-heading85" style="color:#FFFFFF;">
-    INFORMACIÓN DE LA PELÍCULA:
-  </h4>
-  <h4 id="detalle-heading86" style="color:#FFFFFF;">
-    Sinopsis
-  </h4>
-  <h4 id="detalle-heading116" style="color:#FFFFFF;font-weight:300;">
-    {{ item.sinopsis }}
-  </h4>
-  <h4 id="detalle-heading8" style="color:#FFFFFF;">
-    Director
-  </h4>
-  <h4 id="detalle-heading11" style="color:#FFFFFF;font-weight:300;">
-    {{ item.director }}
-  </h4>
-  <h4 id="detalle-heading9" style="color:#FFFFFF;">
-    Productor
-  </h4>
-  <h4 id="detalle-heading12" style="color:#FFFFFF;font-weight:300;">
-    {{ item.productor }}
-  </h4>
-  <h4 id="detalle-heading10" style="color:#FFFFFF;">
-    Reparto
-  </h4>
-  <h4 id="detalle-heading13" style="color:#FFFFFF;font-weight:300;">
-    {{ item.reparto }}
-  </h4>
-  <div class="spacer" style="width:300px;height:21px;" id="detalle-spacer8"></div>
-  <button id="detalle-button6" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="reproducirVideo()">
+<ion-content padding style="background-color:#3A286B;">
+
+  <p style="color:#FFFFFF;"><b><u>Sinopsis:</u>  </b> <span style="font-size: 16px">{{ item.sinopsis }}</span> </p>
+  <p style="color:#FFFFFF;"><b><u>Director</u>:  </b> <span style="font-size: 16px">{{ item.director }}</span> </p>
+  <p style="color:#FFFFFF;"><b><u>Productor</u>:  </b> <span style="font-size: 16px">{{ item.productor }}</span> </p>
+  <p style="color:#FFFFFF;"><b><u>Reparto</u>:  </b> <span style="font-size: 16px">{{ item.reparto }}</span> </p>
+  <p style="color:#FFFFFF;"><b><u>Género</u>:  </b> <span style="font-size: 16px">{{ item.genero }}</span> </p>
+  <p style="color:#FFFFFF;"><b><u>Clasificación de edad</u>:  </b> <span style="font-size: 16px">{{ item.edad }}</span> </p>
+  <p style="color:#FFFFFF;"><b><u>Duración</u>:  </b> <span style="font-size: 16px">{{ item.duracion }}</span> </p>
+
+
+  <button ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="reproducirVideo()">
     Ver trailer
   </button>
-  <button id="detalle-button7" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToComprarEntradas()">
+  <div class="spacer" style="width:300px;height:8px;"></div>
+  <button ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="goToComprarEntradas()">
     Comprar entradas
   </button>
+
 </ion-content>
