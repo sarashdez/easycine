@@ -6,5 +6,5 @@ export interface Entrada {
   lugar : string;
   pelicula : string;
   user : string;
-  imagenURL : string;
+  imagenUrl : string;
 }

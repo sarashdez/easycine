@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
-/*import {StorageProvider} from "../../providers/storage/storage";
-import {AngularFireAuth} from "angularfire2/auth";*/
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "angularfire2/firestore";
+import { NavController, AlertController, NavParams } from 'ionic-angular';
+import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Observable } from 'rxjs';
 import { Entrada } from '../../models/entrada';
 
@@ -15,24 +13,24 @@ export class MisEntradasPage {
 
   private entradasCollection: AngularFirestoreCollection<Entrada>;
   private entradas : Observable<Entrada[]>;
-  private userID : string;
+  private sesion : string;
 
   constructor(public navCtrl: NavController,
-    private alertCtrl: AlertController,
-    private dbStorage : AngularFirestore,
-  /*private _ANGFIRE: AngularFireAuth*/) {
+              private alertCtrl: AlertController,
+              public param: NavParams,
+              private dbStorage : AngularFirestore) {
+    this.sesion = param.get("sesion");
+    console.log('sesionRecuperada: '+this.sesion);
+    this.recuperarEntradas();
   }
 
 
   /**
    * Carga los componentes necesarios para la vista.
    */
-  ionViewWillLoad() {
-    //Primero se comprueba si el usuario ha iniciado sesion. Si es asi, se muestra la info de las entradas que ha comprado.
-    //Si no, se informa que esta es una opción sólo disponible para usuarios registrados.
-    
+  recuperarEntradas() {
     this.entradasCollection = this.dbStorage.collection('entradas', ref => {
-      return ref.where('user', '==', 'pruebaaa')
+      return ref.where('user', '==', this.sesion)
     });
     this.entradas = this.entradasCollection.valueChanges();
     
@@ -73,26 +71,6 @@ export class MisEntradasPage {
         //this.goToLogin();
       }
     });*/
-  }
-
-  /**
-   * Alerta que se muestra cuando el usuario no ha iniciado sesión en la aplicación.
-   */
-  alertaUsuarioNoRegistrado() {
-    console.log("Metodo alertaUsuarioNoRegistrado()");
-    let confirm = this.alertCtrl.create({
-      title: "Ups",
-      message: "Lo sentimos, esta opción sólo está disponible para usuarios registrados",
-      buttons: [
-        {
-          text: '¡Vale!',
-          handler: () => {
-            console.log('"¡Vale!" pulsado');
-          }
-        }
-      ]
-    });
-    confirm.present();
   }
   
 }
