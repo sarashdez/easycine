@@ -1,16 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <!--<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>-->
     <ion-title>
       Nueva cuenta
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page14" style="background-color:#3A286B;">
-  <form id="formCrearCuenta" [formGroup]="form" >
-    <ion-list id="crearCuenta-list8">
+
+<ion-content padding style="background-color:#3A286B;">
+
+  <form [formGroup]="form" >
+    <ion-list>
       <ion-item id="crearCuenta_email">
         <ion-label>
           Email
@@ -35,16 +34,19 @@
         Fecha de nacimiento
       </ion-label>
       <ion-datetime formControlName="fechaNacimiento" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" ></ion-datetime>
-      <!--<ion-input type="text" placeholder="01/01/1900"></ion-input>-->
     </ion-item>
   </form>
-  <div class="spacer" style="width:300px;height:30px;" id="crearCuenta-spacer15"></div>
-  <button id="crearCuenta-button15" ion-button color="light" block style="color:#291F70;" on-click="mostrarOpcionesFotoPerfil()">
+
+  <div class="spacer" style="width:300px;height:30px;" ></div>
+
+  <button ion-button color="light" block style="color:#291F70;" on-click="mostrarOpcionesFotoPerfil()">
     Añadir foto de perfil
   </button>
-  <img [src]="refImagen" *ngIf="refImagen" align="center"/>
-  <div class="spacer" style="width:300px;height:62px;" id="crearCuenta-spacer14"></div>
+  <p *ngIf="refImagen" style="color:#FFFFFF;"><i>Se ha añadido la imagen que has seleccionado correctamente.</i></p>
+  <br>
+
   <button id="buttonCrearCuenta" ion-button color="light" block style="color:#291F70;" on-click="crearCuenta()">
     Crear cuenta
   </button>
+
 </ion-content>

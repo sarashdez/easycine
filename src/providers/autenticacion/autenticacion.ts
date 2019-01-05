@@ -3,24 +3,24 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs/Observable";
 import {AngularFireAuth} from "angularfire2/auth";
-import * as firebase from 'firebase/app';
-
 
 
 @Injectable()
 export class AutenticacionProvider {
 
   public user : Observable<any>;
-  private uID : string;
 
   constructor(public http: Http,
               private _ANGFIRE: AngularFireAuth) {
     this.user = this._ANGFIRE.authState;
-    console.log('Hello AutenticacionProvider');
   }
 
 
-  //Metodo LOGIN().
+  /**
+   * Se accede a la cuenta del usuario.
+   * @param email
+   * @param password
+   */
   loginAuth(email: string, password: string) : Promise<any> {
     console.log("Autenticacion Provider. Login()");
     return new Promise((resolve, reject) => {
@@ -35,7 +35,12 @@ export class AutenticacionProvider {
     });
   }
 
-  //Metodo SIGNUP().
+  /**
+   * Se crea una nueva cuenta para el usuario y se añaden los datos introducidos a la
+   * base de datos.
+   * @param email
+   * @param password
+   */
   signUp(email: string, password: string) : Promise<any> {
     console.log("Autenticacion Provider. SignUp()");
     return new Promise((resolve, reject) => {
@@ -46,27 +51,14 @@ export class AutenticacionProvider {
         })
         .catch((err: any) => {
           reject(err);
+          alert('¡Ups! No se ha podido crear la cuenta.');
         });
     });
-    //TODO: MOSTRAR ALERTA SI EL EMAIL YA EXISTE
   }
 
-  loginStatus() {
-    console.log("loginStatus()");
-    this._ANGFIRE.authState.subscribe(session => {
-      if(session) {
-        //Usuario logueado
-        this.uID = session.uid;
-        console.log("Usuario logueado: "+this.uID);
-        return this.uID;
-      } else {
-        console.log("Ningun usuario logueado");
-        return null;
-      }
-    });
-  }
-
-  //Metodo LOGOUT().
+  /**
+   * Se cierra la sesión del usuario.
+   */
   logOut() : Promise<any> {
     return new Promise ((resolve, reject) => {
       this._ANGFIRE.auth.signOut()

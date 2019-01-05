@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, ViewController} from 'ionic-angular';
+import { AlertController, NavController, ViewController } from 'ionic-angular';
 import { CarteleraPage } from '../cartelera/cartelera';
 import { CrearCuentaPage } from '../crear-cuenta/crear-cuenta';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {AutenticacionProvider} from "../../providers/autenticacion/autenticacion";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
 
 
 @Component({

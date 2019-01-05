@@ -4,10 +4,11 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
 import { StorageProvider } from "../../providers/storage/storage";
-import {AngularFireStorage} from "angularfire2/storage";
+import { AngularFireStorage } from "angularfire2/storage";
 import * as moment from 'moment';
-import {AngularFireAuth} from "angularfire2/auth";
-import {CriteriosBusquedaPage} from "../criterios-busqueda/criterios-busqueda";
+import { AngularFireAuth } from "angularfire2/auth";
+import { CriteriosBusquedaPage } from "../criterios-busqueda/criterios-busqueda";
+
 
 @Component({
   selector: 'page-crear-cuenta',

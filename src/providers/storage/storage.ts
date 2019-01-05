@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {AngularFireStorage, AngularFireUploadTask} from "angularfire2/storage";
-import {AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { AngularFireStorage, AngularFireUploadTask } from "angularfire2/storage";
+import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { Pelicula } from '../../models/pelicula';

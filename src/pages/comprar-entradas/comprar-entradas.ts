@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams, ViewController } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PayPal, PayPalConfiguration, PayPalPayment } from "@ionic-native/paypal";
 import { StorageProvider } from "../../providers/storage/storage";
-import {MisEntradasPage} from "../mis-entradas/mis-entradas";
-import {CarteleraPage} from "../cartelera/cartelera";
+import { CarteleraPage } from "../cartelera/cartelera";
 
 @Component({
   selector: 'page-comprar-entradas',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
+import { AlertController, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ComprarEntradasPage } from '../comprar-entradas/comprar-entradas';
-import {YoutubeVideoPlayer} from "@ionic-native/youtube-video-player";
-import {AngularFireAuth} from "angularfire2/auth";
-import {LoginPage} from "../login/login";
+import { YoutubeVideoPlayer } from "@ionic-native/youtube-video-player";
+import { AngularFireAuth } from "angularfire2/auth";
+import { LoginPage } from "../login/login";
 
 @Component({
   selector: 'page-detalle',

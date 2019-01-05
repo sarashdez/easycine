@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {Platform, Nav, AlertController} from 'ionic-angular';
+import { Platform, Nav, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CarteleraPage } from '../pages/cartelera/cartelera';
@@ -8,10 +8,9 @@ import { MisEntradasPage } from '../pages/mis-entradas/mis-entradas';
 import { CriteriosBusquedaPage } from '../pages/criterios-busqueda/criterios-busqueda';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
-import {MiPerfilPage} from "../pages/mi-perfil/mi-perfil";
-import {AngularFireAuth} from "angularfire2/auth";
+import { MiPerfilPage } from "../pages/mi-perfil/mi-perfil";
+import { AngularFireAuth } from "angularfire2/auth";
 import * as firebase from "firebase";
-import {DetallePage} from "../pages/detalle/detalle";
 
 
 @Component({
@@ -38,7 +37,6 @@ export class MyApp {
       if(session) {
         //Usuario logueado
         firebase.storage().ref().child(`profilePhotos/${session.uid}`).getDownloadURL().then(url => {
-          console.log("URL recuperada de Firebase: " + url);
           this.fotoURL = url;
         });
       } else {
@@ -47,36 +45,60 @@ export class MyApp {
     });
   }
 
+  /**
+   * Navegacion a la pantalla Cartelera.
+   * @param params
+   */
   goToCartelera(params){
     if (!params) params = {};
     this.navCtrl.setRoot(CarteleraPage);
   }
 
+  /**
+   * Navegacion a la pantalla ProximosEstrenos.
+   * @param params
+   */
   goToProximosEstrenos(params){
     if (!params) params = {};
     this.navCtrl.setRoot(ProximosEstrenosPage);
   }
 
+  /**
+   * Navegacion a la pantalla MisEntradas.
+   * @param sesion
+   */
   goToMisEntradas(sesion : string){
     this.navCtrl.push(MisEntradasPage, {
       sesion: sesion});
   }
 
+  /**
+   * Navegacion a la pantalla CriteriosBusqueda.
+   * @param params
+   */
   goToCriteriosBusqueda(params){
     if (!params) params = {};
     this.navCtrl.setRoot(CriteriosBusquedaPage);
   }
 
+  /**
+   * Navegacion a la pantalla MiPerfil.
+   */
   goToMiPerfil(){
     this.navCtrl.push(MiPerfilPage);
   }
 
+  /**
+   * Navegacion a la pantalla Login.
+   */
   goToLogin(){
     this.navCtrl.push(LoginPage);
   }
 
+  /**
+   * Se comprueba si el usuario ha iniciado sesion. Si es asi, se muestra su info. Si no se redirige a Login.
+   */
   comprobarUsuarioLoggedPerfil() {
-    //Primero se comprueba si el usuario ha iniciado sesion. Si es asi, se muestra su info. Si no se redirige a Login.
     let uid : string;
     this._ANGFIRE.authState.subscribe(session => {
       if(session) {
@@ -89,8 +111,10 @@ export class MyApp {
     });
   }
 
+  /**
+   * Se comprueba si el usuario ha iniciado sesion. Si es asi, se muestran sus entradas. Si no se muestra un mensaje.
+   */
   comprobarUsuarioLoggedMisEntradas() {
-    //Primero se comprueba si el usuario ha iniciado sesion. Si es asi, se muestran sus entradas. Si no se redirige un mensaje.
     let uid : string;
     this._ANGFIRE.authState.subscribe(session => {
       if(session) {
@@ -129,9 +153,5 @@ export class MyApp {
     });
     confirm.present();
   }
-
-
-
-
 
 }

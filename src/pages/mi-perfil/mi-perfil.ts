@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, ViewController} from 'ionic-angular';
-import {Observable} from "rxjs/Rx";
-import {AngularFirestore} from "angularfire2/firestore";
-import {AutenticacionProvider} from "../../providers/autenticacion/autenticacion";
-import {AngularFireAuth} from "angularfire2/auth";
-import {HomePage} from "../home/home";
+import { AlertController, NavController, ViewController } from 'ionic-angular';
+import { Observable } from "rxjs/Rx";
+import { AngularFirestore } from "angularfire2/firestore";
+import { AutenticacionProvider } from "../../providers/autenticacion/autenticacion";
+import { AngularFireAuth } from "angularfire2/auth";
+import { HomePage } from "../home/home";
 import * as firebase from 'firebase';
 
 @Component({

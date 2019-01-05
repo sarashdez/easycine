@@ -77,7 +77,6 @@ import { PayPal } from "@ionic-native/paypal";
     StorageProvider,
     YoutubeVideoPlayer,
     PayPal
-
   ]
 })
 export class AppModule {}
