@@ -2,12 +2,20 @@ page-home {
   #texto{
     background-color: rgba(255, 255, 255, 0.75);
     color: #291F70;
-    font-size:18px;
+    font-size: 18px;
+    font-weight: bold;
     text-align: center;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 
   #titulo{
     background-color: rgba(255, 255, 255, 0.75);
+    margin-top: 15px;
+  }
+
+  #paginaInicio{
+    background-image: url("../assets/img/WVXWoDDVRU2dQJkYMDKg_5dff1a54cf29c55395e87148d08062ed.png");
   }
 
 }
