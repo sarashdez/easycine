@@ -1,40 +1,26 @@
 <ion-header>
   <ion-navbar>
-    <!--<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-buttons left>
-      <button ion-button icon-only (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>-->
     <ion-title>
       Comprar entradas
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page10" style="background-color:#3A286B;">
-  <h4 id="comprarEntradas-heading14" style="color:#FFFFFF;">
-    Precio de la entrada:
-  </h4>
-  <h4 id="comprarEntradas-heading15" style="color:#FFFFFF;font-weight:300;">
-    {{ precio }} €
-  </h4>
-  <h4 id="comprarEntradas-heading16" style="color:#FFFFFF;">
-    Día:
-  </h4>
-  <h4 id="comprarEntradas-heading155" style="color:#FFFFFF;font-weight:300;">
-    {{ item.dia }}
-  </h4>
-  <h4 id="comprarEntradas-heading170" style="color:#FFFFFF;">
-    Hora:
-  </h4>
-  <h4 id="comprarEntradas-heading171" style="color:#FFFFFF;font-weight:300;">
-    {{ item.hora }}
-  </h4>
-  <div class="spacer" style="width:300px;height:12px;" id="comprarEntradas-spacer10"></div>
-  <form id="comprarEntradas-form2" [formGroup]="form">
-    <ion-item id="comprarEntradas-select4">
+
+<ion-content padding style="background-color:#3A286B;">
+
+  <h4 style="color:#291F70">Sesión elegida</h4>
+    <p style="color:#FFFFFF;"><b>Película: </b> {{ item.titulo }} </p>
+    <p style="color:#FFFFFF;"><b>Ubicación: </b> {{ item.empresa }} - {{ item.lugar }}</p>
+    <p style="color:#FFFFFF;"><b>Día: </b> {{ item.dia }} </p>
+    <p style="color:#FFFFFF;"><b>Hora: </b> {{ item.hora }} </p>
+
+  <h4 style="color:#291F70">Compra</h4>
+    <p style="color:#FFFFFF;"><b>Precio de la entrada: </b> {{ precio }}€ </p>
+
+  <div class="spacer" style="width:300px;height:12px;"></div>
+
+  <form [formGroup]="form">
+    <ion-item>
       <ion-label>
         Número de entradas
       </ion-label>
@@ -46,9 +32,11 @@
         <ion-option>5</ion-option>
       </ion-select>
     </ion-item>
-    <div class="spacer" style="width:300px;height:25px;" id="comprarEntradas-spacer11"></div>
+    <div class="spacer" style="width:300px;height:25px;"></div>
   </form>
-  <button id="comprarEntradas-button8" ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="confirmarContinuar()">
+
+  <button ion-button color="light" block style="font-weight:500;color:#291F70;" on-click="confirmarContinuar()">
     Continuar
   </button>
+
 </ion-content>

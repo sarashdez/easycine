@@ -83,19 +83,24 @@ export class StorageProvider {
    * @param email
    * @param url
    */
-  uploadEntradaToDB(email: string, cantidad: string, dia: string, empresa: string, hora: string, lugar: string, pelicula: string){
-    this.entradas.doc(email).set({
+  uploadEntradaToDB(sesion: string, cantidad: string, dia: string, empresa: string,
+                    hora: string, lugar: string, pelicula: string, imagen : string){
+    this.entradas.add({
       cantidad: cantidad,
       dia: dia,
       empresa: empresa,
       hora: hora,
       lugar: lugar,
-      pelicula: pelicula
-    }).then(function(docRef) {
-      console.log("Documento añadido.");
-    }).catch(function(error) {
-      console.error("Error al añadir documento.");
-    });
+      pelicula: pelicula,
+      imagenUrl: imagen,
+      user: sesion,
+      })
+      .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function(error) {
+        console.error("Error adding document: ", error);
+      });
   }
 
 }

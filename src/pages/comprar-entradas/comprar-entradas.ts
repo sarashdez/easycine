@@ -3,6 +3,8 @@ import { AlertController, NavController, NavParams, ViewController } from 'ionic
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PayPal, PayPalConfiguration, PayPalPayment } from "@ionic-native/paypal";
 import { StorageProvider } from "../../providers/storage/storage";
+import {MisEntradasPage} from "../mis-entradas/mis-entradas";
+import {CarteleraPage} from "../cartelera/cartelera";
 
 @Component({
   selector: 'page-comprar-entradas',
@@ -12,6 +14,7 @@ export class ComprarEntradasPage {
 
   public form: FormGroup;
   private item: any;
+  private sesion: string;
   private precio: number = 8;
   private numEntradas: string;
   private precioTotal: number;
@@ -19,12 +22,13 @@ export class ComprarEntradasPage {
 
   constructor(public navCtrl: NavController,
               public param: NavParams,
-              private viewCtrl: ViewController,
               private _FB: FormBuilder,
               private alertCtrl: AlertController,
               private paypal: PayPal,
               private _STR: StorageProvider) {
     this.item = param.get("pelicula");
+    this.sesion = param.get("sesion");
+    console.log('sesionRecuperada: '+this.sesion);
     this.form = this._FB.group({
       'numEntradas': ['']
     })
@@ -45,7 +49,6 @@ export class ComprarEntradasPage {
    */
   confirmarContinuar() {
     this.calcularPrecioTotal();
-    console.log("Metodo confirmarContinuar()");
     let confirm = this.alertCtrl.create({
       title: 'Continuar con el pago',
       message: 'El total de tu compra es ' + this.precioTotal + '€. El proceso de pago se realiza con Paypal, ¿deseas continuar?',
@@ -83,11 +86,12 @@ export class ComprarEntradasPage {
         let payment = new PayPalPayment(this.precioTotal.toString(), 'EUR', 'Entradas de cine (EasyCine)', 'sale');
         this.paypal.renderSinglePaymentUI(payment).then(() => {
           //Pago hecho con exito
-          this._STR.uploadEntradaToDB('prueba', this.numEntradas, this.item.dia,
-            this.item.empresa, this.item.hora, this.item.lugar, this.item.peliculaID);
+          this._STR.uploadEntradaToDB(this.sesion, this.numEntradas, this.item.dia,
+            this.item.empresa, this.item.hora, this.item.lugar, this.item.titulo, this.item.imagen);
           let titulo: string = 'Pago realizado';
           let mensaje: string = 'El pago se ha realizado con éxito. Tus entradas están disponibles en "Mis entradas".';
           this.alertaProcesoDePago(titulo, mensaje);
+          this.goToCartelera();
         }, () => {
           //Error en el pago
           let titulo: string = 'Pago fallido';
@@ -127,6 +131,13 @@ export class ComprarEntradasPage {
       ]
     });
     confirm.present();
+  }
+
+  /**
+   * Navegacion a la pantalla Cartelera.
+   */
+  goToCartelera(){
+    this.navCtrl.push(CarteleraPage);
   }
 
 }
