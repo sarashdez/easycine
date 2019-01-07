@@ -7,7 +7,7 @@ import { StorageProvider } from "../../providers/storage/storage";
 import { AngularFireStorage } from "angularfire2/storage";
 import * as moment from 'moment';
 import { AngularFireAuth } from "angularfire2/auth";
-import { CriteriosBusquedaPage } from "../criterios-busqueda/criterios-busqueda";
+import { CarteleraPage } from "../cartelera/cartelera";
 
 
 @Component({
@@ -129,7 +129,7 @@ export class CrearCuentaPage {
           this._STR.uploadProfileInfoToDB(this.fechaNacimiento, this.nombre, userID, this.email);
           this.form.reset();
           alert("¡Tu cuenta ha sido creada!");
-          this.navCtrl.push(CriteriosBusquedaPage);
+          this.navCtrl.push(CarteleraPage);
         });
       });
 
@@ -148,5 +148,6 @@ export class CrearCuentaPage {
     //Formatear fecha
     this.fechaNacimiento = moment(fechaSinFormato).format("DD/MM/YYYY");
   }
+
 
 }
