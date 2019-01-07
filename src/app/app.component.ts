@@ -40,7 +40,7 @@ export class MyApp {
           this.fotoURL = url;
         });
       } else {
-        this.fotoURL = "https://firebasestorage.googleapis.com/v0/b/easy-cine.appspot.com/o/profilePhotos%2FprofileIcon.png?alt=media&token=f8505d1d-ebc1-406f-abc5-c83dfaf387bb";
+        this.fotoURL = "https://firebasestorage.googleapis.com/v0/b/easy-cine.appspot.com/o/profilePhotos%2Fprofile%20icon.png?alt=media&token=e0e4a150-a329-4a53-9c1e-8c3b48672d61";
       }
     });
   }
